@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pageObjects.CommercialsObjects;
 import pageObjects.ContractListObjects;
 import pageObjects.DashboardObjects;
 import pageObjects.GeneralInfromationObjects;
@@ -21,6 +22,7 @@ public class AddContractTC {
 	ContractListObjects contractList ;
 	GeneralInfromationObjects generalInformation ;
 	TermObjects term ;
+	CommercialsObjects commercials ;
 
 	@BeforeTest
 	public void setUpBrowser() {
@@ -69,6 +71,12 @@ public class AddContractTC {
 	public void saveTermOpenEndedContracts() {
 		term = new TermObjects(driver);
 		term.setOpenEndedContractTab("2019", "MAR", "March 20, 2019", "2", "Month", "10", "Year", "2019", "MAR", "March 5, 2019", "written", "2", "Week", "10", "Day", "Selenium");
+	}
+	
+	@Test(priority = 7)
+	public void updateCommercialsGeneralTerms() {
+		commercials = new CommercialsObjects(driver);
+		commercials.setGeneralTerms("Weekly", "30", "Day", "2019", "APR", "April 1, 2019", "2019", "MAY", "May 1, 2019", "EUR", "Automation");
 	}
 
 }

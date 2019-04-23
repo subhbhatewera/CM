@@ -5,7 +5,7 @@
     <classes>
       <class name="pageTestCases.EditContractTC">
         <methods>
-          <include name="updateTerm"/>
+          <include name="updateTransactionRateStandard"/>
           <include name="setUpBrowser"/>
         </methods>
       </class> <!-- pageTestCases.EditContractTC -->

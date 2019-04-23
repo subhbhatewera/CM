@@ -1,44 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
+<testng-results skipped="0" failed="0" ignored="5" total="9" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="131618" started-at="2019-04-21T15:16:52Z" finished-at="2019-04-21T15:19:04Z">
+  <suite name="Default suite" duration-ms="79786" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:45:14Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="131618" started-at="2019-04-21T15:16:52Z" finished-at="2019-04-21T15:19:04Z">
+    <test name="Default test" duration-ms="79786" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:45:14Z">
       <class name="pageTestCases.EditContractTC">
-        <test-method status="PASS" signature="setUpBrowser()[pri:0, instance:pageTestCases.EditContractTC@5442a311]" name="setUpBrowser" is-config="true" duration-ms="11029" started-at="2019-04-21T15:16:52Z" finished-at="2019-04-21T15:17:03Z">
+        <test-method status="PASS" signature="setUpBrowser()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="setUpBrowser" is-config="true" duration-ms="15712" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:44:10Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpBrowser -->
-        <test-method status="PASS" signature="loginWithUsername()[pri:0, instance:pageTestCases.EditContractTC@5442a311]" name="loginWithUsername" duration-ms="1679" started-at="2019-04-21T15:17:03Z" finished-at="2019-04-21T15:17:05Z">
+        <test-method status="PASS" signature="loginWithUsername()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="loginWithUsername" duration-ms="2776" started-at="2019-04-23T14:44:10Z" finished-at="2019-04-23T14:44:13Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginWithUsername -->
-        <test-method status="PASS" signature="openContractListingPage()[pri:1, instance:pageTestCases.EditContractTC@5442a311]" name="openContractListingPage" duration-ms="5917" started-at="2019-04-21T15:17:05Z" finished-at="2019-04-21T15:17:11Z">
+        <test-method status="PASS" signature="openContractListingPage()[pri:1, instance:pageTestCases.EditContractTC@548e7350]" name="openContractListingPage" duration-ms="5642" started-at="2019-04-23T14:44:13Z" finished-at="2019-04-23T14:44:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openContractListingPage -->
-        <test-method status="PASS" signature="openEditContractPage()[pri:2, instance:pageTestCases.EditContractTC@5442a311]" name="openEditContractPage" duration-ms="583" started-at="2019-04-21T15:17:11Z" finished-at="2019-04-21T15:17:11Z">
+        <test-method status="PASS" signature="openEditContractPage()[pri:2, instance:pageTestCases.EditContractTC@548e7350]" name="openEditContractPage" duration-ms="501" started-at="2019-04-23T14:44:19Z" finished-at="2019-04-23T14:44:19Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openEditContractPage -->
-        <test-method status="PASS" signature="updateGeneralInformation()[pri:3, instance:pageTestCases.EditContractTC@5442a311]" name="updateGeneralInformation" duration-ms="29868" started-at="2019-04-21T15:17:11Z" finished-at="2019-04-21T15:17:41Z">
+        <test-method status="PASS" signature="updateTransactionRateStandard()[pri:8, instance:pageTestCases.EditContractTC@548e7350]" name="updateTransactionRateStandard" duration-ms="55060" started-at="2019-04-23T14:44:19Z" finished-at="2019-04-23T14:45:14Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- updateGeneralInformation -->
-        <test-method status="PASS" signature="updateTermFixedPeriod()[pri:4, instance:pageTestCases.EditContractTC@5442a311]" name="updateTermFixedPeriod" duration-ms="32249" started-at="2019-04-21T15:17:41Z" finished-at="2019-04-21T15:18:14Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateTermFixedPeriod -->
-        <test-method status="PASS" signature="updateTermFixedPeriodWithoutRenewal()[pri:5, instance:pageTestCases.EditContractTC@5442a311]" name="updateTermFixedPeriodWithoutRenewal" duration-ms="27437" started-at="2019-04-21T15:18:14Z" finished-at="2019-04-21T15:18:41Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateTermFixedPeriodWithoutRenewal -->
-        <test-method status="PASS" signature="updateTermOpenEndedContracts()[pri:6, instance:pageTestCases.EditContractTC@5442a311]" name="updateTermOpenEndedContracts" duration-ms="22783" started-at="2019-04-21T15:18:41Z" finished-at="2019-04-21T15:19:04Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- updateTermOpenEndedContracts -->
+        </test-method> <!-- updateTransactionRateStandard -->
       </class> <!-- pageTestCases.EditContractTC -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
