@@ -1,7 +1,5 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,15 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utills.InputData;
+
 public class GeneralInfromationObjects {
 
 	WebDriver driver ;
 	WebDriverWait myWait ;
+	InputData input ;
 
-	
+
 	@FindBy(xpath = "//div[@class='mat-tab-label-content'][contains(text(),'General Information')]")
 	WebElement generalInformationTab ;
-	
+
 	@FindBy(xpath = "//mat-select[@formcontrolname='selectedContractCategory']")
 	WebElement categoryDropDown ;
 
@@ -59,121 +60,64 @@ public class GeneralInfromationObjects {
 	}
 
 	public void setCategory(String category) {
-		try {
-		customWait(categoryDropDown);
-		categoryDropDown.click();
-		WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text'][contains(text(),'"+category+"')]"));
-		customWait(element);
-		element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(categoryDropDown, category);
 	}
 
 	public void setSubCategory(String subCategory) {
-		try
-		{
-		customWait(subCategoryDropDown);
-		subCategoryDropDown.click();
-		WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text'][contains(text(),'"+subCategory+"')]"));
-		customWait(element);
-		element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(subCategoryDropDown, subCategory);
 	}
 
 	public void setBusinessPartner(String businessPartner) {
-		try
-		{
-		customWait(businessPartnerDropDown);
-		businessPartnerDropDown.click();
-		WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text'][contains(text(),'"+businessPartner+"')]"));
-		customWait(element);
-		element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(businessPartnerDropDown, businessPartner);
 	}
 
-	public void setContractTitle(String cTitle) {
-		try
-		{
-		customWait(contractTitleField);
-		contractTitleField.clear();
-		contractTitleField.sendKeys(cTitle);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+	public void setContractTitle(String contractTitle) {
+		input = new InputData(driver);
+		input.setDataField(contractTitleField, contractTitle);
 	}
 
 	public void setLocation(String location) {
-		try
-		{
-		customWait(locationField);
-		locationField.clear();
-		Thread.sleep(1000);
-		locationField.sendKeys(location);
-		locationField.sendKeys(Keys.ARROW_DOWN);
-		locationField.sendKeys(Keys.ENTER);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setLocationField(locationField, location);
 	}
 
 	public void setCurrencyType(String currencyType) {
-		try
-		{
-		customWait(currencyTypeDropDown);
-		currencyTypeDropDown.click();
-		WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text'][contains(text(),'"+currencyType+"')]"));
-		customWait(element);
-		element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(currencyTypeDropDown, currencyType);	
 	}
 
 	public void setContractValue(String contractValue) {
-		try
-		{
-		customWait(contractValueField);
-		contractValueField.clear();
-		contractValueField.sendKeys(contractValue);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDataField(contractValueField, contractValue);
 	}
 
 	public void setLegalEntity(String legalEntity) {
-		try
-		{
-		customWait(legalEntityDropDown);
-		legalEntityDropDown.click();
-		WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text'][contains(text(),'"+legalEntity+"')]"));
-		customWait(element);
-		element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(legalEntityDropDown, legalEntity);
 	}
 
-	public void setGeneralInformation(String category,String subCategory, String businessPartner, String cTitle, String location, String currencyType, String contractValue, String legalEntity) {
+	public void clickCancelButton() {
+		input = new InputData(driver);
+		input.clickButton(cancelButton);
+	}
+
+	public void clickSaveAndContinueButton() {
+		input = new InputData(driver);
+		input.clickButton(saveAndContinueButton);
+	}
+	
+	public void setGeneralInfromation(String category, String subCategory, String businessPartner, String contractTitle, String location, String currencyType, String contractValue, String legalEntity) {
 		setCategory(category);
 		setSubCategory(subCategory);
 		setBusinessPartner(businessPartner);
-		setContractTitle(cTitle);
+		setContractTitle(contractTitle);
 		setLocation(location);
 		setCurrencyType(currencyType);
 		setContractValue(contractValue);
 		setLegalEntity(legalEntity);
+		//clickSaveAndContinueButton();
 	}
 }

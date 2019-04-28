@@ -1,6 +1,6 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,15 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utills.MyCalendar;
 import utills.InputData;
 
 public class CommercialsObjects {
 
 	WebDriver driver ;
 	WebDriverWait myWait ;
-	MyCalendar cal ;
 	InputData input ;
+	JavascriptExecutor js ;
 
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Commercials')])[1]")
 	WebElement commercialsTab ;
@@ -108,6 +107,24 @@ public class CommercialsObjects {
 	@FindBy(xpath = "//mat-select[@formcontrolname='selectedSubProject']")
 	WebElement subProjectDropDown ;
 
+	@FindBy(xpath = "//mat-select[@formcontrolname='selectedTierType']")
+	WebElement tierTypeDropDown ;
+
+	@FindBy(xpath = "//mat-select[@formcontrolname='selectedVolumeSplit']")
+	WebElement volumeSplitDropDown ;
+
+	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[2]")
+	WebElement lowerTierField ;	
+	
+	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[3]")
+	WebElement upperTierField ;	
+	
+	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[4]")
+	WebElement tRVRateField ;	
+	
+	@FindBy(xpath = "(//mat-select[starts-with(@id,'mat-select')])[3]")
+	WebElement applicableFactorDropDown ;	
+	
 	@FindBy(xpath = "//input[@formcontrolname='location']")
 	WebElement locationField ;	
 
@@ -128,126 +145,73 @@ public class CommercialsObjects {
 	}
 
 	public void clickCommercialsTab() {
-		try {
-			customWait(commercialsTab);
-			commercialsTab.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		customWait(commercialsTab);
+		commercialsTab.click();		
 	}
 
 	public void clickGeneralTermsTab() {
-		try
-		{
-			customWait(generalTermsTab);
-			generalTermsTab.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		customWait(generalTermsTab);
+		generalTermsTab.click();
 	}
 
 	public void clickTransactionRateStandardTab() {
-		try
-		{
-			customWait(transactionRateStandardTab);
-			transactionRateStandardTab.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		customWait(transactionRateStandardTab);
+		transactionRateStandardTab.click();
 	}
 
 	public void clickTransactionRateVolumeTab() {
-		try
-		{
-			customWait(transactionRateVolumeTab);
-			transactionRateVolumeTab.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		customWait(transactionRateVolumeTab);
+		transactionRateVolumeTab.click();
 	}
 
 	public void setBillingFrequency(String billingFrequency) {
-		try {
-			customWait(billingFrequencyDropDown);
-			billingFrequencyDropDown.click();
-			WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text' and contains(text(),'"+billingFrequency+"')]"));
-			element.click();	
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(billingFrequencyDropDown, billingFrequency);
 	}
 
-	public void setCreditPeriod(String periodValue, String periodType) {
-		try
-		{
-			creditPeriodField.clear();
-			creditPeriodField.sendKeys(periodValue);
-			creditPeriodTypeDropDown.click();
-			WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text' and contains(text(),'"+periodType+"')]"));
-			element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+	public void setCreditPeriod(String creditPeriodValue) {
+		input = new InputData(driver);
+		input.setDataField(creditPeriodField, creditPeriodValue);
 	}
 
-	public void setBillingStartDate(String year, String month, String day) {
-		try {
-			cal = new MyCalendar(driver);
-			cal.setDate(billingStartDateField, year, month, day);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+	public void setCreditPeriodType(String creditPeriodType) {
+		input = new InputData(driver);
+		input.setDropDown(creditPeriodTypeDropDown, creditPeriodType);
 	}
 
-	public void setBillingEndDate(String year, String month, String day) {
-		try
-		{
-			cal = new MyCalendar(driver);
-			cal.setDate(billingEndDateField, year, month, day);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+	public void setBillingStartDate(String billingStartYear, String billingStartMonth, String billingStartDay) {
+		input = new InputData(driver);
+		input.setDate(billingStartDateField, billingStartYear, billingStartMonth, billingStartDay);
+	}
+
+	public void setBillingEndDate(String billingEndYear, String billingEndMonth, String billingEndDay) {
+		input = new InputData(driver);
+		input.setDate(billingEndDateField, billingEndYear, billingEndMonth, billingEndDay);
 	}
 
 	public void setBillingCurrency(String billingCurrency) {
-		try
-		{
-			billingCurrencyDropDown.click();
-			WebElement element = driver.findElement(By.xpath("//span[@class='mat-option-text' and contains(text(),'"+billingCurrency+"')]"));
-			element.click();
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDropDown(billingCurrencyDropDown, billingCurrency);
 	}
 
 	public void setClause(String clause) {
-		try
-		{
-			clauseField.clear();
-			clauseField.sendKeys(clause);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.setDataField(clauseField, clause);
+	}
+
+	public void clickCancelButton() {
+		input = new InputData(driver);
+		input.clickButton(cancelButton);
+	}
+
+	public void clickSaveAndContinueButton() {
+		input = new InputData(driver);
+		input.clickButton(saveAndContinueButton);
 	}
 
 	public void clickAddButton() {
-		try {
-			customWait(addButton);
-			addButton.click();
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
+		input = new InputData(driver);
+		input.clickButton(addButton);
 	} 
 
 	public void setLineItem(String lineItem) {
@@ -255,9 +219,13 @@ public class CommercialsObjects {
 		input.setDataField(lineItemField, lineItem);		
 	}
 
-	public void setRate(String currencyType, String rate) {
+	public void setCurrency(String currency) {
 		input = new InputData(driver);
-		input.setDropDown(currencyTypeDropDown, currencyType);
+		input.setDropDown(currencyTypeDropDown, currency);		
+	}
+
+	public void setRate(String rate) {
+		input = new InputData(driver);
 		input.setDataField(rateField, rate);
 	}
 
@@ -266,14 +234,14 @@ public class CommercialsObjects {
 		input.setDropDown(uomDropDown, uomOption);
 	}
 
-	public void setEffectiveStartDate(String effSYear,String effSMonth,String effSDay) {
-		cal = new MyCalendar(driver);
-		cal.setDate(effectiveStartDateField, effSYear, effSMonth, effSDay);		
+	public void setEffectiveStartDate(String effectiveStartYear,String effectiveStartMonth,String effectiveStartDay) {
+		input = new InputData(driver);
+		input.setDate(effectiveStartDateField, effectiveStartYear, effectiveStartMonth, effectiveStartDay);		
 	}
 
-	public void setEffectiveEndDate(String effEYear,String effEMonth,String effEDay) {
-		cal = new MyCalendar(driver);
-		cal.setDate(effectiveEndDateField, effEYear, effEMonth, effEDay);
+	public void setEffectiveEndDate(String effectiveEndYear,String effectiveEndMonth,String effectiveEndDay) {
+		input = new InputData(driver);
+		input.setDate(effectiveEndDateField, effectiveEndYear, effectiveEndMonth, effectiveEndDay);		
 	}
 
 	public void setReferenceNo(String refrenceNo) {
@@ -288,6 +256,8 @@ public class CommercialsObjects {
 
 	public void setLinkedOpportunity(String linkedOpportunity) {
 		input = new InputData(driver);
+		js = (JavascriptExecutor) driver ;
+		js.executeScript("arguments[0].scrollIntoView()", serviceDropDown);
 		input.setDropDown(linkedOpportunityDropDown, linkedOpportunity);
 	}
 
@@ -295,42 +265,77 @@ public class CommercialsObjects {
 		input = new InputData(driver);
 		input.setDataField(platformsApplicableField, platformsApplicable);
 	}
-	
+
 	public void setService(String service) {
 		input = new InputData(driver);
+	//	js = (JavascriptExecutor) driver ;
+	//	js.executeScript("arguments[0].scrollIntoView()", serviceDropDown);
 		input.setDropDown(serviceDropDown, service);
 	}
-	
+
 	public void setSubService(String subService) {
 		input = new InputData(driver);
 		input.setDropDown(subServiceDropDown, subService);
 	}
-	
+
 	public void setLocation(String location) {
 		input = new InputData(driver);
 		input.setLocationField(locationField, location);
 	}
+	
+	public void setTierType(String tierType) {
+		input = new InputData(driver);
+		input.setDropDown(tierTypeDropDown, tierType);
+	}
+	
+	public void setVolumeSplit(String volumeSplit) {
+		input = new InputData(driver);
+		input.setDropDown(volumeSplitDropDown, volumeSplit);
+	}
 
-	public void setGeneralTerms(String billingFrequency, String periodValue, String periodType, String syear,String smonth,String sday, String eyear,String emonth,String eday, String billingCurrency, String clause) {
+	public void setLowerTier(String lowerTier) {
+		input = new InputData(driver);
+		input.setDataField(lowerTierField, lowerTier);
+	}
+	
+	public void setUpperTier(String upperTier) {
+		input = new InputData(driver);
+		input.setDataField(upperTierField, upperTier);
+	}
+	
+	public void setTRVRate(String tRVRate) {
+		input = new InputData(driver);
+		input.setDataField(tRVRateField, tRVRate);
+	}
+	
+	public void setApplicableFactor(String applicableFactor) {
+		input = new InputData(driver);
+		input.setDropDown(applicableFactorDropDown, applicableFactor);
+	}
+
+	public void setGeneralTerms(String billingFrequency, String creditPeriodValue, String creditPeriodType, String billingStartYear, String billingStartMonth, String billingStartDay, String billingEndYear, String billingEndMonth, String billingEndDay, String billingCurrency, String clause) {
 		clickCommercialsTab();
 		clickGeneralTermsTab();
 		setBillingFrequency(billingFrequency);
-		setCreditPeriod(periodValue, periodType);
-		setBillingStartDate(syear, smonth, sday);
-		setBillingEndDate(eyear, emonth, eday);
+		setCreditPeriod(creditPeriodValue);
+		setCreditPeriodType(creditPeriodType);
+		setBillingStartDate(billingStartYear, billingStartMonth, billingStartDay);
+		setBillingEndDate(billingEndYear, billingEndMonth, billingEndDay);
 		setBillingCurrency(billingCurrency);
 		setClause(clause);
+		//clickSaveAndContinueButton();
 	}
 
-	public void setTransactionRateStandard(String lineItem, String currencyType, String rate, String uomOption, String effSYear,String effSMonth,String effSDay, String effEYear,String effEMonth,String effEDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
+	public void setTransactionRateStandard(String lineItem, String currency, String rate, String uomOption, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear,String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
 		clickCommercialsTab();
 		clickTransactionRateStandardTab();
 		clickAddButton();
 		setLineItem(lineItem);
-		setRate(currencyType, rate);
+		setCurrency(currency);
+		setRate(rate);
 		setUOM(uomOption);
-		setEffectiveStartDate(effSYear, effSMonth, effSDay);
-		setEffectiveEndDate(effEYear, effEMonth, effEDay);
+		setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
+		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
 		setReferenceNo(refrenceNo);
 		setRelatedReferenceNo(relatedRefNo);
 		setLinkedOpportunity(linkedOpportunity);
@@ -338,5 +343,30 @@ public class CommercialsObjects {
 		setService(service);
 		setSubService(subService);
 		setLocation(location);
+		//clickSaveAndContinueButton();
+	}
+
+	public void setTransactionRateVolume(String lineItem, String tierType, String volumeSplit, String lowerTier, String upperTier, String tRVRate, String applicableFactor, String uomOption, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear,String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
+		clickCommercialsTab();
+		clickTransactionRateVolumeTab();
+		clickAddButton();
+		setLineItem(lineItem);
+		setTierType(tierType);
+		setVolumeSplit(volumeSplit);
+		setLowerTier(lowerTier);
+		setUpperTier(upperTier);
+		setTRVRate(tRVRate);
+		setApplicableFactor(applicableFactor);
+		setUOM(uomOption);
+		setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
+		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
+		setReferenceNo(refrenceNo);
+		setRelatedReferenceNo(relatedRefNo);
+		setLinkedOpportunity(linkedOpportunity);
+		setPlatformsApplicable(platformsApplicable);
+		setService(service);
+		setSubService(subService);
+		setLocation(location);
+		//clickSaveAndContinueButton();
 	}
 }

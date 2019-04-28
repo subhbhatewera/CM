@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="5" total="9" passed="4">
+<testng-results skipped="0" failed="0" ignored="5" total="10" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="79786" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:45:14Z">
+  <suite name="Default suite" duration-ms="137686" started-at="2019-04-28T15:49:20Z" finished-at="2019-04-28T15:51:38Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="79786" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:45:14Z">
+    <test name="Default test" duration-ms="137686" started-at="2019-04-28T15:49:20Z" finished-at="2019-04-28T15:51:38Z">
       <class name="pageTestCases.EditContractTC">
-        <test-method status="PASS" signature="setUpBrowser()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="setUpBrowser" is-config="true" duration-ms="15712" started-at="2019-04-23T14:43:55Z" finished-at="2019-04-23T14:44:10Z">
+        <test-method status="PASS" signature="setUpBrowser()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="setUpBrowser" is-config="true" duration-ms="12278" started-at="2019-04-28T15:49:20Z" finished-at="2019-04-28T15:49:33Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpBrowser -->
-        <test-method status="PASS" signature="loginWithUsername()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="loginWithUsername" duration-ms="2776" started-at="2019-04-23T14:44:10Z" finished-at="2019-04-23T14:44:13Z">
+        <test-method status="PASS" signature="doLogin()[pri:0, instance:pageTestCases.EditContractTC@548e7350]" name="doLogin" duration-ms="1888" started-at="2019-04-28T15:49:33Z" finished-at="2019-04-28T15:49:34Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginWithUsername -->
-        <test-method status="PASS" signature="openContractListingPage()[pri:1, instance:pageTestCases.EditContractTC@548e7350]" name="openContractListingPage" duration-ms="5642" started-at="2019-04-23T14:44:13Z" finished-at="2019-04-23T14:44:19Z">
+        </test-method> <!-- doLogin -->
+        <test-method status="PASS" signature="openContractListingPage()[pri:1, instance:pageTestCases.EditContractTC@548e7350]" name="openContractListingPage" duration-ms="6496" started-at="2019-04-28T15:49:34Z" finished-at="2019-04-28T15:49:41Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openContractListingPage -->
-        <test-method status="PASS" signature="openEditContractPage()[pri:2, instance:pageTestCases.EditContractTC@548e7350]" name="openEditContractPage" duration-ms="501" started-at="2019-04-23T14:44:19Z" finished-at="2019-04-23T14:44:19Z">
+        <test-method status="PASS" signature="openEditContractPage()[pri:2, instance:pageTestCases.EditContractTC@548e7350]" name="openEditContractPage" duration-ms="573" started-at="2019-04-28T15:49:41Z" finished-at="2019-04-28T15:49:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openEditContractPage -->
-        <test-method status="PASS" signature="updateTransactionRateStandard()[pri:8, instance:pageTestCases.EditContractTC@548e7350]" name="updateTransactionRateStandard" duration-ms="55060" started-at="2019-04-23T14:44:19Z" finished-at="2019-04-23T14:45:14Z">
+        <test-method status="PASS" signature="saveTransactionRateStandard()[pri:8, instance:pageTestCases.EditContractTC@548e7350]" name="saveTransactionRateStandard" duration-ms="67225" started-at="2019-04-28T15:49:42Z" finished-at="2019-04-28T15:50:49Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- updateTransactionRateStandard -->
+        </test-method> <!-- saveTransactionRateStandard -->
+        <test-method status="PASS" signature="saveTransactionRateVolume()[pri:8, instance:pageTestCases.EditContractTC@548e7350]" name="saveTransactionRateVolume" duration-ms="49152" started-at="2019-04-28T15:50:49Z" finished-at="2019-04-28T15:51:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- saveTransactionRateVolume -->
       </class> <!-- pageTestCases.EditContractTC -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

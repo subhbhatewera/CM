@@ -32,7 +32,7 @@ public class AddContractTC {
 	}
 
 	@Test (priority = 0)
-	public void loginWithUsername() {
+	public void doLogin() {
 		home = new HomepageObjects(driver);
 		home.doLogin("cvekaso", "cvekaso");
 	}
@@ -49,34 +49,39 @@ public class AddContractTC {
 		contractList.clickAddContractsButton();
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = true)
 	public void saveGeneralInformation() {
 		generalInformation = new GeneralInfromationObjects(driver);
-		generalInformation.setGeneralInformation("Vendor", "Florists", "UGH", "Edited","Pune","€","2589","BA 1");
+		generalInformation.setGeneralInfromation("Customer", "Education", "ZGG", "Automation Testing", "Mandsaur", "$", "5200", "NA");
 	}
 
-	@Test(priority = 4)
-	public void saveTermFixedPeriod() {
+	@Test(priority = 4, enabled = true)
+	public void saveFixedPeriodTerm() {
 		term = new TermObjects(driver);
-		term.setFixedPeriodTab("2020", "NOV" , "November 10, 2020" ,"2021", "NOV" , "November 10, 2021", "12" ,"Month","2020", "NOV" , "November 8, 2020" ,"written", "1", "Year", "4", "Week", "30", "Day", "Selenium");
+		term.setFixedPeriod("2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "12", "Month", "2018", "DEC", "December 1, 2018", "Auto", "2", "Month", "2", "Week", "10", "Day", "Page Object Model");
 	}
 
-	@Test(priority = 5)
-	public void saveTermFixedPeriodWithoutRenewal() {
+	@Test(priority = 5, enabled = false)
+	public void saveFixedPeriodWithRenewalTerm() {
 		term = new TermObjects(driver);
-		term.setFixedPeriodWithoutRenewalTab("2019", "JAN", "January 1, 2019", "2025", "JAN", "January 11, 2025", "6", "Year", "2018", "DEC", "December 30, 2018", "Auto", "2", "Month", "15", "Day", "Selenium");
+		term.setFixedPeriodWithoutRenewal("2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "12", "Month", "2018", "DEC", "December 1, 2018", "Auto", "2", "Week", "10", "Day", "Page Object Model");
 	}
 
-	@Test(priority = 6)
-	public void saveTermOpenEndedContracts() {
+	@Test(priority = 6, enabled = false)
+	public void saveOpenEndedContractsTerm() {
 		term = new TermObjects(driver);
-		term.setOpenEndedContractTab("2019", "MAR", "March 20, 2019", "2", "Month", "10", "Year", "2019", "MAR", "March 5, 2019", "written", "2", "Week", "10", "Day", "Selenium");
+		term.setOpenEndedContracts("2019", "JAN", "January 1, 2019", "2", "Month", "1", "Year", "2018", "DEC", "December 1, 2018", "Auto", "2", "Week", "10", "Day", "Page Object Model");
 	}
-	
-	@Test(priority = 7)
-	public void updateCommercialsGeneralTerms() {
+
+	@Test(priority = 7, enabled = true)
+	public void saveGeneralTermsTab() {
 		commercials = new CommercialsObjects(driver);
-		commercials.setGeneralTerms("Weekly", "30", "Day", "2019", "APR", "April 1, 2019", "2019", "MAY", "May 1, 2019", "EUR", "Automation");
+		commercials.setGeneralTerms("Monthly", "30", "Day", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "EUR", "General Terms");
 	}
 
+	@Test(priority = 8)
+	public void saveTransactionRateStandard() {
+		commercials = new CommercialsObjects(driver);
+		commercials.setTransactionRateStandard("Automation", "$", "5200", "Image", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "AR01", "ARR01", "Beograd", "Windows 10", "Accounts Payable", "Mailroom", "Mandsaur");
+	}
 }
