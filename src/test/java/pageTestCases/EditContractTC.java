@@ -79,15 +79,27 @@ public class EditContractTC {
 		commercials.setGeneralTerms("Monthly", "30", "Day", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "EUR", "General Terms");
 	}
 
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 8, enabled = false)
 	public void saveTransactionRateStandard() {
 		commercials = new CommercialsObjects(driver);
 		commercials.setTransactionRateStandard("Automation", "$", "5200", "Image", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "AR01", "ARR01", "Beograd", "Windows 10", "Accounts Payable", "Mailroom", "Mandsaur");
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 8, enabled = false)
 	public void saveTransactionRateVolume() {
 		commercials = new CommercialsObjects(driver);
 		commercials.setTransactionRateVolume("Automation","Simple","Overall","10", "12", "20", "Volume", "Image", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "AR01", "ARR01", "Beograd", "Windows 10", "Accounts Payable", "Mailroom", "Mandsaur");
+	}
+	
+	@Test(priority = 9, enabled = false)
+	public void saveTimeAndMaterialModel(){
+		commercials = new CommercialsObjects(driver);
+		commercials.setTimeAndMaterialModel("Automation", "D1", "2019", "JAN", "January 1, 2019", "12", "Image", "5", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "AR01", "ARR01", "Beograd", "Windows 10", "Accounts Payable", "Mailroom", "Mandsaur");
+	}
+	
+	@Test(priority = 9, enabled = true)
+	public void saveFixedFee(){
+		commercials = new CommercialsObjects(driver);
+		commercials.setFixedFee("Automation", "$", "100", "Hour", "Yes", "2019", "JAN", "January 1, 2019", "2020", "JAN", "January 1, 2020", "AR01", "ARR01", "Windows 10", "Accounts Payable", "Mailroom", "Mandsaur");
 	}
 }

@@ -12,6 +12,9 @@ public class DashboardObjects {
 	WebDriver driver ;
 	WebDriverWait myWait ;
 
+	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Dashboard')]")
+	WebElement heading ;
+	
 	@FindBy(xpath = "//a[@ng-reflect-message='Contracts']")
 	WebElement contractsLink ;
 
