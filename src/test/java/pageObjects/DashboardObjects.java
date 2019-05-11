@@ -4,17 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DashboardObjects {
-
-	WebDriver driver ;
-	WebDriverWait myWait ;
+public class DashboardObjects extends BasePage {
 
 	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Dashboard')]")
 	WebElement heading ;
-	
+
 	@FindBy(xpath = "//a[@ng-reflect-message='Contracts']")
 	WebElement contractsLink ;
 
@@ -22,27 +17,17 @@ public class DashboardObjects {
 	WebElement contractsListLink ;
 
 	public DashboardObjects (WebDriver driver) {
-		this.driver = driver ;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public void customWait(WebElement element) {
-		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
+	public DashboardObjects clickContractsLink() {
+		clickElement(contractsLink);
+		return this;
 	}
 
-	public void clickContractsLink() {
-		customWait(contractsLink);
-		contractsLink.click();
-	}
-
-	public void clickContractsListLink() {
-		customWait(contractsListLink);
-		contractsListLink.click();
-	}
-
-	public void openContractListingPage() {
-		clickContractsLink();
-		clickContractsListLink();
-	}
+	public DashboardObjects clickContractsListLink() {
+		clickElement(contractsListLink);
+		return this;
+	}	
 }

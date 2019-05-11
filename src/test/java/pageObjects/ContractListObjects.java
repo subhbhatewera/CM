@@ -5,36 +5,50 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ContractListObjects {
+public class ContractListObjects extends BasePage{
 
-	WebDriver driver ;
-	WebDriverWait myWait ;
+
+	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Contract List')]")
+	WebElement heading ;
 
 	@FindBy(xpath = "//button[@class='cm-btn primary-btn']")
 	WebElement addContractButton ;
 
-	public ContractListObjects (WebDriver driver) {
-		this.driver = driver ;
+	public ContractListObjects(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public void customWait(WebElement element) {
-		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
+	public ContractListObjects verifyLandingPage(){
+		assertEquals(heading, "Contract List");
+		return this ;
+	}	
+
+	public ContractListObjects clickAddContractButton() {
+		clickElement(addContractButton);
+		return this;
 	}
 
-	public void clickAddContractsButton() {
-		customWait(addContractButton);
-		addContractButton.click();
+	public void clickEditContractIcon(String contractTitle) {
+		try {
+		WebElement element = driver.findElement(By.xpath("(//span[@title='"+contractTitle+"']//following::i[@mattooltip='Edit'])[1]"));
+		Thread.sleep(1000);
+		clickElement(element);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 	
-	public void clicEditContractIcon(String cTitle) {
-		WebElement element  = driver.findElement(By.xpath("(//span[@title='"+cTitle+"']//following::i[@mattooltip='Edit'])[1]"));
-		customWait(element);
-		element.click();
+	public void clickEditContractIcon1(String contractTitle) {
+		try {
+			WebElement element  = driver.findElement(By.xpath("(//span[@title='"+contractTitle+"']//following::i[@mattooltip='Edit'])[1]"));
+			waitFor(element);
+			element.click();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
-
 }

@@ -5,17 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utills.InputData;
+public class CommercialsObjects extends BasePage {
 
-public class CommercialsObjects {
-
-	WebDriver driver ;
-	WebDriverWait myWait ;
-	InputData input ;
 	JavascriptExecutor js ;
+
 
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Commercials')])[1]")
 	WebElement commercialsTab ;
@@ -38,79 +32,91 @@ public class CommercialsObjects {
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Minimum')])[1]")
 	WebElement minimumBillingTab ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='billingFrequencyType']")
+	@FindBy(xpath = "//mat-select[@placeholder='Billing Frequency']")
 	WebElement billingFrequencyDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='creditPeriod']")
+	@FindBy(xpath = "//input[@placeholder='Credit Period']")
 	WebElement creditPeriodField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='creditPeriodType']")
 	WebElement creditPeriodTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='billingStartDate']")
+	@FindBy(xpath = "//input[@placeholder='Billing Start Date']")
 	WebElement billingStartDateField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='billingEndDate']")
+	@FindBy(xpath = "//input[@placeholder='Billing End Date']")
 	WebElement billingEndDateField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='billingCurrency']")
+	@FindBy(xpath = "//mat-select[@placeholder='Billing Currency']")
 	WebElement billingCurrencyDropDown ;
 
-	@FindBy(xpath = "//textarea[@formcontrolname='clause']")
+	@FindBy(xpath = "//textarea[@placeholder='Clause']")
 	WebElement clauseField ;
+
+	@FindBy(id = "cancel")
+	WebElement cancelButton ;
+
+	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[1]")
+	WebElement listingScreenSaveButton ;	
 
 	@FindBy(id = "add-button")
 	WebElement addButton ;
 
-	@FindBy(xpath = "//input[@formcontrolname='inputLineItem']")
+	@FindBy(xpath = "//input[@placeholder='Line Item']")
 	WebElement lineItemField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='currencyType']")
 	WebElement currencyTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='rate']")
+	@FindBy(xpath = "//input[@placeholder='Rate']")
 	WebElement rateField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedUom']")
+	@FindBy(xpath = "//mat-select[@placeholder='UOM']")
 	WebElement uomDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='effectiveStartDate']")
+	@FindBy(xpath = "//input[@placeholder='Effective Start Date']")
 	WebElement effectiveStartDateField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='effectiveEndDate']")
+	@FindBy(xpath = "//input[@placeholder='Effective End Date']")
 	WebElement effectiveEndDateField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='inputReferenceNo']")
+	@FindBy(xpath = "//input[@placeholder='Reference No']")
 	WebElement referenceNoField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='inputRelatedRefNo']")
+	@FindBy(xpath = "//input[@placeholder='Related Ref No']")
 	WebElement relatedReferenceNoField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedLinkedOpportunity']")
+	@FindBy(xpath = "//mat-select[@placeholder='Linked Opportunity']")
 	WebElement linkedOpportunityDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedRelatedDoc']")
+	@FindBy(xpath = "//mat-select[@placeholder='Related Doc']")
 	WebElement relatedDocDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='inputPlatformsApplicable']")
+	@FindBy(xpath = "//input[@placeholder='Platforms Applicable']")
 	WebElement platformsApplicableField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedService']")
+	@FindBy(xpath = "//mat-select[@placeholder='Service']")
 	WebElement serviceDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedSubService']")
+	@FindBy(xpath = "//mat-select[@placeholder='Sub Service']")
 	WebElement subServiceDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedProject']")
+	@FindBy(xpath = "//mat-select[@placeholder='Project']")
 	WebElement projectDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedSubProject']")
+	@FindBy(xpath = "//mat-select[@placeholder='Sub Project']")
 	WebElement subProjectDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedTierType']")
+	@FindBy(xpath = "//input[@placeholder='Location']")
+	WebElement locationField ;
+
+	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[2]")
+	WebElement addScreenSaveButton ;
+
+	@FindBy(xpath = "//mat-select[@placeholder='Tier Type']")
 	WebElement tierTypeDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedVolumeSplit']")
+	@FindBy(xpath = "//mat-select[@placeholder='Volume Split']")
 	WebElement volumeSplitDropDown ;
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[2]")
@@ -120,373 +126,411 @@ public class CommercialsObjects {
 	WebElement upperTierField ;	
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[4]")
-	WebElement tRVRateField ;	
+	WebElement transactionRateVolumeRateField ;	
 
 	@FindBy(xpath = "(//mat-select[starts-with(@id,'mat-select')])[3]")
 	WebElement applicableFactorDropDown ;	
 
-	@FindBy(xpath = "//input[@formcontrolname='location']")
-	WebElement locationField ;
-
-	@FindBy(xpath = "//textarea[@formcontrolname='inputFieldDescription']")
+	@FindBy(xpath = "//textarea[@placeholder='Description']")
 	WebElement descriptionField ;
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[1]")
-	WebElement tableDescriptionField ;
+	WebElement timeAndMaterialModelDescriptionField ;
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[2]")
-	WebElement effectiveDateField ;
+	WebElement timeAndMaterialModelEffectiveDateField ;
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[3]")
-	WebElement tAMMRateField ;
+	WebElement timeAndMaterialModelRateField ;
 
 	@FindBy(xpath = "(//mat-select[starts-with(@id,'mat-select')])[1]")
-	WebElement tAMMUOMDropDown ;
+	WebElement timeAndMaterialModelUOMDropDown ;
 
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[4]")
-	WebElement tAMMQuantityField ;
+	WebElement timeAndMaterialModelQuantityField ;
 
-	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[4]")
-	WebElement advancedBillingDropDown ;
+	@FindBy(xpath = "//mat-select[@placeholder='Advance Billing']")
+	WebElement advanceBillingDropDown ;
 
-	@FindBy(id="cancel")
-	WebElement cancelButton ;
+	@FindBy(xpath = "//mat-select[@placeholder='Applicable Period']")
+	WebElement applicablePeriodDropDown ;
 
-	@FindBy(id="saveAndContinueContractButton")
-	WebElement saveAndContinueButton ;
+	@FindBy(xpath = "//mat-select[@placeholder='Type']")
+	WebElement typeDropDown ;
 
-	public CommercialsObjects (WebDriver driver) {
-		this.driver = driver ;
+	@FindBy(xpath = "(//i[@mattooltip='Edit'])[1]")
+	WebElement editIcon ;
+
+	@FindBy(xpath = "(//i[@mattooltip='Copy'])[1]")
+	WebElement copyIcon ;
+
+	@FindBy(xpath = "(//i[@mattooltip='Delete'])[1]")
+	WebElement deleteIcon ;
+
+	@FindBy(xpath = "//button[contains(@class,'cm-btn cancel')]")
+	WebElement confirmationCancelButtonIcon ;
+
+	@FindBy(xpath = "//button[contains(@class,'cm-btn accept')]")
+	WebElement confirmationYesButtonIcon ;
+
+
+	public CommercialsObjects(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public void customWait(WebElement element) {
-		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
+	public CommercialsObjects gotoCommercialsTab() {
+		clickElement(commercialsTab);
+		return this;
 	}
 
-	public void clickCommercialsTab() {
-		customWait(commercialsTab);
-		commercialsTab.click();		
+	public CommercialsObjects gotoGeneralTermsTab() {
+		clickElement(generalTermsTab);
+		return this;
 	}
 
-	public void clickGeneralTermsTab() {
-		customWait(generalTermsTab);
-		generalTermsTab.click();
+	public CommercialsObjects gotoTransactionRateStandardTab() {
+		clickElement(transactionRateStandardTab);
+		return this;
 	}
 
-	public void clickTransactionRateStandardTab() {
-		customWait(transactionRateStandardTab);
-		transactionRateStandardTab.click();
+	public CommercialsObjects gotoTransactionRateVolumeTab() {
+		clickElement(transactionRateVolumeTab);
+		return this;
 	}
 
-	public void clickTransactionRateVolumeTab() {
-		customWait(transactionRateVolumeTab);
-		transactionRateVolumeTab.click();
+	public CommercialsObjects gotoTimeAndMaterialModelTab() {
+		clickElement(timeAndMaterialModelTab);
+		return this;
 	}
 
-	public void clickTimeAndMaterialModelTab() {
-		customWait(timeAndMaterialModelTab);
-		timeAndMaterialModelTab.click();
+	public CommercialsObjects gotoFixedFeeTab() {
+		clickElement(fixedFeeTab);
+		return this;
 	}
 
-	public void clickFixedFeeTab() {
-		customWait(fixedFeeTab);
-		fixedFeeTab.click();
+	public CommercialsObjects gotoMinimumBillingTab() {
+		clickElement(minimumBillingTab);
+		return this;
 	}
 
-	public void clickMinimumBillingTab() {
-		customWait(minimumBillingTab);
-		minimumBillingTab.click();
+	public CommercialsObjects setBillingFrequency( String billingFrequency) {
+		selectDropdownOption(billingFrequencyDropDown, billingFrequency);
+		return this ;
 	}
 
-	public void setBillingFrequency(String billingFrequency) {
-		input = new InputData(driver);
-		input.setDropDown(billingFrequencyDropDown, billingFrequency);
+	public CommercialsObjects setCreditPeriod(String creditPeriod, String creditPeriodType) {
+		writeText(creditPeriodField, creditPeriod);
+		selectDropdownOption(creditPeriodTypeDropDown, creditPeriodType);
+		return this;
+	}	
+
+	public CommercialsObjects setBillingStartDate(String billingStartYear, String billingStartMonth, String billingStartDay) {
+		selectDate(billingStartDateField, billingStartYear, billingStartMonth, billingStartDay);
+		return this;
 	}
 
-	public void setCreditPeriod(String creditPeriodValue) {
-		input = new InputData(driver);
-		input.setDataField(creditPeriodField, creditPeriodValue);
+	public CommercialsObjects setBillingEndDate(String billingEndYear, String billingEndMonth, String billingEndDay) {
+		selectDate(billingEndDateField, billingEndYear, billingEndMonth, billingEndDay);
+		return this;
 	}
 
-	public void setCreditPeriodType(String creditPeriodType) {
-		input = new InputData(driver);
-		input.setDropDown(creditPeriodTypeDropDown, creditPeriodType);
+	public CommercialsObjects setBillingCurrency( String billingCurrency) {
+		selectDropdownOption(billingCurrencyDropDown, billingCurrency);
+		return this ;
 	}
 
-	public void setBillingStartDate(String billingStartYear, String billingStartMonth, String billingStartDay) {
-		input = new InputData(driver);
-		input.setDate(billingStartDateField, billingStartYear, billingStartMonth, billingStartDay);
+	public CommercialsObjects setClause(String clause) {
+		writeText(clauseField, clause);
+		return this;
 	}
 
-	public void setBillingEndDate(String billingEndYear, String billingEndMonth, String billingEndDay) {
-		input = new InputData(driver);
-		input.setDate(billingEndDateField, billingEndYear, billingEndMonth, billingEndDay);
+	public CommercialsObjects clickListingScreenSaveAndContinueButton() {
+		clickElement(listingScreenSaveButton);
+		return this;
 	}
 
-	public void setBillingCurrency(String billingCurrency) {
-		input = new InputData(driver);
-		input.setDropDown(billingCurrencyDropDown, billingCurrency);
+	public CommercialsObjects clickAddScreenSaveAndContinueButton() {
+		scrollIntoView(addScreenSaveButton);
+		clickElement(addScreenSaveButton);
+		return this;
 	}
 
-	public void setClause(String clause) {
-		input = new InputData(driver);
-		input.setDataField(clauseField, clause);
-	}
-
-	public void clickCancelButton() {
-		input = new InputData(driver);
-		input.clickButton(cancelButton);
-	}
-
-	public void clickSaveAndContinueButton() {
-		input = new InputData(driver);
-		input.clickButton(saveAndContinueButton);
-	}
-
-	public void clickAddButton() {
-		input = new InputData(driver);
-		input.clickButton(addButton);
-	} 
-
-	public void setLineItem(String lineItem) {
-		input = new InputData(driver);
-		input.setDataField(lineItemField, lineItem);		
-	}
-
-	public void setCurrency(String currency) {
-		input = new InputData(driver);
-		input.setDropDown(currencyTypeDropDown, currency);		
-	}
-
-	public void setRate(String rate) {
-		input = new InputData(driver);
-		input.setDataField(rateField, rate);
-	}
-
-	public void setUOM(String uomOption) {
-		input = new InputData(driver);
-		input.setDropDown(uomDropDown, uomOption);
-	}
-
-	public void setEffectiveStartDate(String effectiveStartYear,String effectiveStartMonth,String effectiveStartDay) {
-		input = new InputData(driver);
-		input.setDate(effectiveStartDateField, effectiveStartYear, effectiveStartMonth, effectiveStartDay);		
-	}
-
-	public void setEffectiveEndDate(String effectiveEndYear,String effectiveEndMonth,String effectiveEndDay) {
-		input = new InputData(driver);
-		input.setDate(effectiveEndDateField, effectiveEndYear, effectiveEndMonth, effectiveEndDay);		
-	}
-
-	public void setReferenceNo(String refrenceNo) {
-		input = new InputData(driver);
-		input.setDataField(referenceNoField, refrenceNo);
-	}
-
-	public void setRelatedReferenceNo(String relatedRefNo) {
-		input = new InputData(driver);
-		input.setDataField(relatedReferenceNoField, relatedRefNo);
-	}
-
-	public void setLinkedOpportunity(String linkedOpportunity) {
-		input = new InputData(driver);
-		js = (JavascriptExecutor) driver ;
-		js.executeScript("arguments[0].scrollIntoView()", serviceDropDown);
-		input.setDropDown(linkedOpportunityDropDown, linkedOpportunity);
-	}
-
-	public void setPlatformsApplicable(String platformsApplicable) {
-		input = new InputData(driver);
-		input.setDataField(platformsApplicableField, platformsApplicable);
-	}
-
-	public void setService(String service) {
-		input = new InputData(driver);
-		//	js = (JavascriptExecutor) driver ;
-		//	js.executeScript("arguments[0].scrollIntoView()", serviceDropDown);
-		input.setDropDown(serviceDropDown, service);
-	}
-
-	public void setSubService(String subService) {
-		input = new InputData(driver);
-		input.setDropDown(subServiceDropDown, subService);
-	}
-
-	public void setLocation(String location) {
-		input = new InputData(driver);
-		input.setLocationField(locationField, location);
-	}
-
-	public void setTierType(String tierType) {
-		input = new InputData(driver);
-		input.setDropDown(tierTypeDropDown, tierType);
-	}
-
-	public void setVolumeSplit(String volumeSplit) {
-		input = new InputData(driver);
-		input.setDropDown(volumeSplitDropDown, volumeSplit);
-	}
-
-	public void setLowerTier(String lowerTier) {
-		input = new InputData(driver);
-		input.setDataField(lowerTierField, lowerTier);
-	}
-
-	public void setUpperTier(String upperTier) {
-		input = new InputData(driver);
-		input.setDataField(upperTierField, upperTier);
-	}
-
-	public void setTRVRate(String tRVRate) {
-		input = new InputData(driver);
-		input.setDataField(tRVRateField, tRVRate);
-	}
-
-	public void setApplicableFactor(String applicableFactor) {
-		input = new InputData(driver);
-		input.setDropDown(applicableFactorDropDown, applicableFactor);
-	}
-
-	public void setDescription(String description) {
-		input = new InputData(driver);
-		input.setDataField(descriptionField, description);
-	}
-
-	public void setTableDescription(String tableDescription) {
-		input = new InputData(driver);
-		input.setDataField(tableDescriptionField, tableDescription);
-	}
-
-	public void setTAMMRate(String rate) {
-		input = new InputData(driver);
-		input.setDataField(tAMMRateField, rate);
-	}
-
-	public void setTAMMEffectiveDate(String effectiveYear, String effectiveMonth, String effectiveDay) {
-		input = new InputData(driver);
-		input.setDate(effectiveDateField, effectiveYear, effectiveMonth, effectiveDay);
-	}
-
-	public void setTAMMUOM(String uomOption) {
-		input = new InputData(driver);
-		input.setDropDown(tAMMUOMDropDown, uomOption);
-	}
-
-	public void setTAMMQuantity(String quantity) {
-		input = new InputData(driver);
-		input.setDataField(tAMMQuantityField, quantity);
-	}
-
-	public void setAdnacedBilling(String advancedBilling, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay) {
-		input = new InputData(driver);
-		input.setDropDown(advancedBillingDropDown, advancedBilling);
-		switch (advancedBilling) {
-		case "Yes":
-			setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
-			setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
-			break;
-		case "No":
-			break ;
-		}
-	}
-
-	public void setGeneralTerms(String billingFrequency, String creditPeriodValue, String creditPeriodType, String billingStartYear, String billingStartMonth, String billingStartDay, String billingEndYear, String billingEndMonth, String billingEndDay, String billingCurrency, String clause) {
-		clickCommercialsTab();
-		clickGeneralTermsTab();
+	public CommercialsObjects setGeneralTerms(String billingFrequency, String creditPeriod, String creditPeriodType, String billingStartYear, String billingStartMonth, String billingStartDay, String billingEndYear, String billingEndMonth, String billingEndDay, String billingCurrency, String clause) {
 		setBillingFrequency(billingFrequency);
-		setCreditPeriod(creditPeriodValue);
-		setCreditPeriodType(creditPeriodType);
+		setCreditPeriod(creditPeriod, creditPeriodType);
 		setBillingStartDate(billingStartYear, billingStartMonth, billingStartDay);
 		setBillingEndDate(billingEndYear, billingEndMonth, billingEndDay);
 		setBillingCurrency(billingCurrency);
 		setClause(clause);
-		//clickSaveAndContinueButton();
+		return this;
 	}
 
-	public void setTransactionRateStandard(String lineItem, String currency, String rate, String uomOption, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear,String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
-		clickCommercialsTab();
-		clickTransactionRateStandardTab();
-		clickAddButton();
+	public CommercialsObjects clickAddButton() {
+		try {
+			Thread.sleep(1500);
+			clickElement(addButton);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return this ;
+	}
+
+	public CommercialsObjects setLineItem(String lineItem) {
+		writeText(lineItemField, lineItem);
+		return this;
+	}
+
+	public CommercialsObjects setCurrency(String currency) {
+		selectDropdownOption(currencyTypeDropDown, currency);
+		return this;
+	}
+
+	public CommercialsObjects setRate(String rate) {
+		writeText(rateField, rate);
+		return this;
+	}
+
+	public CommercialsObjects setUOM(String uom) {
+		selectDropdownOption(uomDropDown, uom);
+		return this;
+	}
+
+	public CommercialsObjects setEffectiveStartDate(String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay) {
+		if(effectiveStartDateField.isEnabled()) {
+			selectDate(effectiveStartDateField, effectiveStratYear, effectiveStratMonth, effectiveStratDay);
+		}
+		return this;
+	}
+
+	public CommercialsObjects setEffectiveEndDate(String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay) {
+		if(effectiveEndDateField.isEnabled()) {
+			selectDate(effectiveEndDateField, effectiveEndYear, effectiveEndMonth, effectiveEndDay);
+		}
+		return this;
+	}
+
+	public CommercialsObjects setReferenceNo(String referenceNo) {
+		writeText(referenceNoField, referenceNo);
+		return this;
+	}
+
+	public CommercialsObjects setRelatedRefNo(String relatedRefNo) {
+		writeText(relatedReferenceNoField, relatedRefNo);
+		return this;
+	}
+
+	public CommercialsObjects setLinkedOpportunity(String linkedOpportunity) {
+		scrollIntoView(linkedOpportunityDropDown);
+		selectDropdownOption(linkedOpportunityDropDown, linkedOpportunity );
+		return this;
+	}
+
+	public CommercialsObjects setRelatedDoc(String relatedDoc) {
+		selectDropdownOption(relatedDocDropDown, relatedDoc );
+		return this;
+	}
+
+	public CommercialsObjects setPlatformsApplicable(String platformsApplicable) {
+		writeText(platformsApplicableField, platformsApplicable);
+		return this;
+	}
+
+	public CommercialsObjects setService(String service) {
+		selectDropdownOption(serviceDropDown, service);
+		return this;
+	}
+
+	public CommercialsObjects setSubService(String subService) {
+		selectDropdownOption(subServiceDropDown, subService);
+		return this;
+	}
+
+	public CommercialsObjects setProject(String project) {
+		selectDropdownOption(projectDropDown, project);
+		return this;
+	}
+
+	public CommercialsObjects setSubProject(String subProject) {
+		selectDropdownOption(subProjectDropDown, subProject);
+		return this;
+	}
+
+	public CommercialsObjects setLocation(String location) {
+		selectLocation(locationField, location);
+		return this;
+	}
+
+	public CommercialsObjects setTransactionRateStandard(String lineItem, String currency, String rate, String uom, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String referenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
 		setLineItem(lineItem);
 		setCurrency(currency);
 		setRate(rate);
-		setUOM(uomOption);
-		setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
+		setUOM(uom);
+		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
 		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
-		setReferenceNo(refrenceNo);
-		setRelatedReferenceNo(relatedRefNo);
+		setReferenceNo(referenceNo);
+		setRelatedRefNo(relatedRefNo);
 		setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
 		setSubService(subService);
 		setLocation(location);
-		//clickSaveAndContinueButton();
+		return this ;
 	}
 
-	public void setTransactionRateVolume(String lineItem, String tierType, String volumeSplit, String lowerTier, String upperTier, String tRVRate, String applicableFactor, String uomOption, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear,String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
-		clickCommercialsTab();
-		clickTransactionRateVolumeTab();
-		clickAddButton();
+	public CommercialsObjects setTierType(String tierType) {
+		selectDropdownOption(tierTypeDropDown, tierType);
+		return this;
+	}
+
+	public CommercialsObjects setVolumeSplit(String volumeSplit) {
+		selectDropdownOption(volumeSplitDropDown, volumeSplit);
+		return this;
+	}
+
+	public CommercialsObjects setLowerTier(String lowerTier) {
+		writeText(lowerTierField, lowerTier);
+		return this ;
+	}
+
+	public CommercialsObjects setUpperTier(String upperTier) {
+		writeText(upperTierField, upperTier);
+		return this ;
+	}
+
+	public CommercialsObjects setTransactionRateVolumeRate(String rate) {
+		writeText(transactionRateVolumeRateField, rate);
+		return this ;
+	}
+
+	public CommercialsObjects setApplicableFactor(String applicableFactor) {
+		selectDropdownOption(applicableFactorDropDown, applicableFactor);
+		return this;
+	}
+
+	public CommercialsObjects setTransactionRateVolume(String lineItem, String tierType, String volumeSplit, String lowerTier, String upperTier, String rate, String applicableFactor, String uom, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String referenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
 		setLineItem(lineItem);
 		setTierType(tierType);
 		setVolumeSplit(volumeSplit);
 		setLowerTier(lowerTier);
 		setUpperTier(upperTier);
-		setTRVRate(tRVRate);
+		setTransactionRateVolumeRate(rate);
 		setApplicableFactor(applicableFactor);
-		setUOM(uomOption);
-		setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
+		setUOM(uom);
+		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
 		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
-		setReferenceNo(refrenceNo);
-		setRelatedReferenceNo(relatedRefNo);
+		setReferenceNo(referenceNo);
+		setRelatedRefNo(relatedRefNo);
 		setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
 		setSubService(subService);
-		setLocation(location);
-		//clickSaveAndContinueButton();
+		//setLocation(location);
+		return this ;
 	}
 
-	public void setTimeAndMaterialModel(String description, String tableDescription, String effectiveYear, String effectiveMonth, String effectiveDay, String rate, String uomOption, String quantity, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
-		clickCommercialsTab();
-		clickTimeAndMaterialModelTab();
-		clickAddButton();
+	public CommercialsObjects setDescription (String description) {
+		writeText(descriptionField, description);
+		return this;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModelDescription(String timeAndMaterialModelDescription) {
+		writeText(timeAndMaterialModelDescriptionField, timeAndMaterialModelDescription);
+		return this;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModelEffectiveDate(String effectiveYear, String effectiveMonth, String effectiveDay) {
+		selectDate(timeAndMaterialModelEffectiveDateField, effectiveYear, effectiveMonth, effectiveDay);
+		return this;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModelRate(String rate) {
+		writeText(timeAndMaterialModelRateField, rate);
+		return this;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModelUOM(String uom) {
+		selectDropdownOption(timeAndMaterialModelUOMDropDown, uom);
+		return this ;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModelQuantity (String quantity) {
+		writeText(timeAndMaterialModelQuantityField, quantity);
+		return this;
+	}
+
+	public CommercialsObjects setTimeAndMaterialModel(String description, String timeAndMaterialModelDescription, String effectiveYear, String effectiveMonth, String effectiveDay, String rate, String uom, String quantity, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String referenceNo, String relatedRefNo, String linkedOpportunity, String platformsApplicable, String service, String subService, String location) {
 		setDescription(description);
-		setTableDescription(tableDescription);
-		setTAMMEffectiveDate(effectiveYear, effectiveMonth, effectiveDay);
-		setTAMMRate(rate);
-		setTAMMUOM(uomOption);
-		setTAMMQuantity(quantity);
-		setEffectiveStartDate(effectiveStartYear, effectiveStartMonth, effectiveStartDay);
+		setTimeAndMaterialModelDescription(timeAndMaterialModelDescription);
+		setTimeAndMaterialModelEffectiveDate(effectiveYear, effectiveMonth, effectiveDay);
+		setTimeAndMaterialModelRate(rate);
+		setTimeAndMaterialModelUOM(uom);
+		setTimeAndMaterialModelQuantity(quantity);
+		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
 		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
-		setReferenceNo(refrenceNo);
-		setRelatedReferenceNo(relatedRefNo);
+		setReferenceNo(referenceNo);
+		setRelatedRefNo(relatedRefNo);
 		setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
 		setSubService(subService);
 		setLocation(location);
-		//clickSaveAndContinueButton();
+		return this ;
 	}
-	
-	public void setFixedFee(String lineItem, String currency, String rate, String uomOption,String advancedBilling, String effectiveStartYear, String effectiveStartMonth, String effectiveStartDay, String effectiveEndYear,String effectiveEndMonth, String effectiveEndDay, String refrenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
-		clickCommercialsTab();
-		clickFixedFeeTab();
-		clickAddButton();
+
+	public CommercialsObjects setAdvanceBilling(String advanceBilling) {
+		selectDropdownOption(advanceBillingDropDown, advanceBilling);
+		return this;
+	}
+
+	public CommercialsObjects setApplicablePeriod(String applicablePeriod) {
+		selectDropdownOption(applicablePeriodDropDown, applicablePeriod);
+		return this;
+	}
+
+	public CommercialsObjects setFixedFee(String lineItem, String currency, String rate, String uom, String advanceBilling, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String applicablePeriod, String referenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
 		setLineItem(lineItem);
 		setCurrency(currency);
 		setRate(rate);
-		setUOM(uomOption);
-		setAdnacedBilling(advancedBilling, effectiveStartYear, effectiveStartMonth, effectiveStartDay, effectiveEndYear, effectiveEndMonth, effectiveEndDay);
-		setReferenceNo(refrenceNo);
-		setRelatedReferenceNo(relatedRefNo);
+		setUOM(uom);
+		setAdvanceBilling(advanceBilling);
+		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
+		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
+		setApplicablePeriod(applicablePeriod);
+		setReferenceNo(referenceNo);
+		setRelatedRefNo(relatedRefNo);
 		//setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
 		setSubService(subService);
-		setLocation(location);		
-		//clickSaveAndContinueButton();
+		setLocation(location);
+		return this ;
 	}
+
+	public CommercialsObjects setType(String type) {
+		selectDropdownOption(typeDropDown, type);
+		return this;
+	}
+
+	public CommercialsObjects setMinimumBilling(String lineItem, String type, String currency, String rate, String uom, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String applicablePeriod, String referenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
+		setLineItem(lineItem);
+		setType(type);
+		setCurrency(currency);
+		setRate(rate);
+		setUOM(uom);
+		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
+		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
+		setApplicablePeriod(applicablePeriod);
+		setReferenceNo(referenceNo);
+		setRelatedRefNo(relatedRefNo);
+		//setLinkedOpportunity(linkedOpportunity);
+		setPlatformsApplicable(platformsApplicable);
+		setService(service);
+		setSubService(subService);
+		setLocation(location);
+		return this ;
+	}
+
+
 }

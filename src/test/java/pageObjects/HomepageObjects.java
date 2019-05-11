@@ -1,8 +1,5 @@
 package pageObjects;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +16,7 @@ public class HomepageObjects extends BasePage{
 	FetchOTP fetch ;
 	DashboardObjects dashboard ;
 
-	@FindBy(id = "mat-input-22")
+	@FindBy(xpath = "//input[@name='username']")
 	WebElement userNameField ;
 
 	@FindBy(id = "loginBtn")
@@ -34,11 +31,23 @@ public class HomepageObjects extends BasePage{
 	@FindBy(xpath = "//div[contains(@class,'toast-error')]")
 	WebElement errorToaster ;
 
+	@FindBy(xpath = "//div[contains(@class,'toast')]")
+	WebElement successToaster ;	
+
 	@FindBy(xpath = "//p[contains(text(),'OTP LOGIN')]")
 	WebElement otpLoginLink ;
 
+	@FindBy(xpath = "//p[contains(text(),'FORGOT PASSWORD')]")
+	WebElement forgotPasswordLink ;
+
 	@FindBy(xpath = "//span[@class='mat-button-wrapper' and contains(text(),'Submit')]")
 	WebElement submitButton ;
+
+	@FindBy(id = "inputForgotUsername")
+	WebElement forgotPasswordUsername ;
+
+	@FindBy(id = "sendBTN")
+	WebElement sendButton ;
 
 	//Constructor
 	public HomepageObjects (WebDriver driver) {
@@ -72,8 +81,9 @@ public class HomepageObjects extends BasePage{
 		return this ;
 	}
 
-	public void clickLoginButton() {
+	public HomepageObjects clickLoginButton() {
 		clickElement(loginButton);
+		return this;
 	}
 
 	public HomepageObjects verifyLandingPage(){
@@ -82,10 +92,11 @@ public class HomepageObjects extends BasePage{
 		return this ;
 	}
 
-	public HomepageObjects verifyToasterError(String errorMessage) {
+	public HomepageObjects verifyErrorToaster(String errorMessage) {
 		try {
 			Thread.sleep(1500);
 			assertEquals(errorToaster, errorMessage);
+			errorToaster.click();
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -98,8 +109,23 @@ public class HomepageObjects extends BasePage{
 		return this ;
 	}
 
+	public HomepageObjects clickForgotPasswordLink() {
+		clickElement(forgotPasswordLink);
+		return this ;
+	}
+
 	public HomepageObjects clickSubmitButton() {
 		clickElement(submitButton);
+		return this ;
+	}
+
+	public HomepageObjects setForgotPasswordUsername(String username) {
+		writeText(forgotPasswordUsername, username);
+		return this;
+	}
+
+	public HomepageObjects clickSendButton() {
+		clickElement(sendButton);
 		return this ;
 	}
 
@@ -117,32 +143,37 @@ public class HomepageObjects extends BasePage{
 		setPassword(password);
 		clickElement(loginButton);
 		return this;
-	}
+	}	
 
-	public HomepageObjects doOTPLogin(String userName, String userEmail, String userPassword) {
+	public HomepageObjects doOTPLogin(String userEmail, String userPassword) {
 		fetch = new FetchOTP(driver);
-		setUserName(userName);
-		clickNextButton();
-		clickOTPLoginLink();
 		String mainWindow = driver.getWindowHandle();
 		gotoExelaOnlineEmail();
-		Set<String> set = driver.getWindowHandles();
-		Iterator<String> itr = set.iterator();
-		while(itr.hasNext()) {
-			String childWindow = itr.next();
-			if(!mainWindow.equals(childWindow)) {
-				driver.switchTo().window(childWindow);
-				String OTP = fetch.fetchOTP(userEmail, userPassword);
-				driver.switchTo().window(mainWindow);
-				for(int i = 0 ; i<OTP.length() ; i++) {
-					String digit = String.valueOf(OTP.charAt(i));
-					System.out.println(digit);
-					WebElement element = driver.findElement(By.xpath("//input[@formcontrolname='digitFormControlName"+(i+1)+"']"));
-					writeText(element, digit);
-				}
-			}	
-		}
+		switchtoChildWindow();
+		String OTP = fetch.fetchOTP(userEmail, userPassword);
+		//fetch.signOut();
+		driver.switchTo().window(mainWindow);
+		for(int i = 0 ; i<OTP.length() ; i++) {
+			String digit = String.valueOf(OTP.charAt(i));
+			WebElement element = driver.findElement(By.xpath("//input[@formcontrolname='digitFormControlName"+(i+1)+"']"));
+			writeText(element, digit);
+		}			
 		clickSubmitButton();
 		return this;
+	}
+
+	public HomepageObjects fetchPassword(String userName)  {
+		fetch = new FetchOTP(driver);
+		String mainWindow = driver.getWindowHandle();
+		switchtoChildWindow();
+		driver.navigate().refresh();
+		String password = fetch.fetchPassword();
+		//fetch.signOut();
+		driver.switchTo().window(mainWindow);
+		driver.navigate().refresh();
+		setUserName(userName);
+		clickNextButton();
+		setPassword(password);
+		return this;		
 	}
 }

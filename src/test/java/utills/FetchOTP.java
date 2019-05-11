@@ -22,10 +22,22 @@ public class FetchOTP extends BasePage {
 	WebElement cmAppFolder ;
 
 	@FindBy(xpath = "(//span[contains(text(),'Login with OTP')])[1]")
-	WebElement emailLink ;
+	WebElement otpEmailLink ;
 
-	@FindBy(xpath = "//p[contains(text(),'Hi')]")
-	WebElement emailBodyLink ;
+	@FindBy(xpath = "(//span[contains(text(),'Forgot Password')])[1]")
+	WebElement forgotPasswordEmailLink ;
+
+	@FindBy(xpath = "//div//p[contains(text(),'Hi')]")
+	WebElement otpEmailBodyLink ;
+
+	@FindBy(xpath = "//div//p[contains(text(),'Your')]")
+	WebElement passwordEmailBodyLink ;
+
+	@FindBy(xpath = "//button[contains(@aria-label,'menu with submenu')]")
+	WebElement userNavigationMenu;
+
+	@FindBy(xpath = "//span[contains(text(),'Sign out')]")
+	WebElement signOutLink ;
 
 
 	public FetchOTP (WebDriver driver) {
@@ -45,33 +57,53 @@ public class FetchOTP extends BasePage {
 		clickElement(signInButton);
 	}
 
-	public void openEmail() {
+	public void openOTPEmail() {
 		clickElement(cmAppFolder);
-		clickElement(emailLink);		
+		clickElement(otpEmailLink);
+	}
+
+	public void openForgotPasswordEmail() {
+		clickElement(cmAppFolder);		
+		clickElement(forgotPasswordEmailLink);		
+	}
+
+	public void signOut() {
+		clickElement(userNavigationMenu);
+		clickElement(signOutLink);
 	}
 
 	public String getNumberFromString() {
-		String number = null ;
-		try {
-		waitFor(emailBodyLink);
-		Thread.sleep(3000);
+		String number = null ;		
+		waitFor(otpEmailBodyLink);
 		//Get Email Body Text
-		String emailText = emailBodyLink.getText();
+		String emailText = otpEmailBodyLink.getText();
 		//Get OTP from String Text
-		number = emailText.replaceAll("[^0-9]", "");
-		System.out.println(number);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		number = emailText.replaceAll("[^0-9]", "");			
 		return number;		
+	}
+
+	public String getPasswordFromEmailBody() {
+		String password = null;		
+		waitFor(passwordEmailBodyLink);			
+		//Get Email Body Text
+		String emailText = passwordEmailBodyLink.getText();
+		// Get Password from String Text
+		password = emailText.substring(22,30);		
+		return password ;
 	}
 
 	public String fetchOTP(String userEmail, String userPassword) {
 		setUseremail(userEmail);
 		setPassword(userPassword);
 		clickSignInButton();
-		openEmail();
+		openOTPEmail();
 		return getNumberFromString();
 	}
+
+	public String fetchPassword() {		
+		openForgotPasswordEmail();		
+		return getPasswordFromEmailBody();
+	}
+
+
 }

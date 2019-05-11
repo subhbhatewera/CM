@@ -1,6 +1,11 @@
 package pageObjects;
 
+
+import java.util.Iterator;
+import java.util.Set;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +19,7 @@ public class BasePage {
 
 	WebDriver driver ;
 	WebDriverWait myWait ;
+	JavascriptExecutor js ;	
 
 	@FindBy(xpath = "//button[@aria-label='Choose month and year']")
 	WebElement monthAndYearButton ;
@@ -24,6 +30,8 @@ public class BasePage {
 	@FindBy(xpath = "//button[@aria-label='Next 20 years']")
 	WebElement nextButton ;
 
+	@FindBy(xpath = "//div[contains(@class,'toast')]")
+	WebElement successToaster ;
 
 	//Constructor
 	public BasePage (WebDriver driver) {
@@ -36,7 +44,7 @@ public class BasePage {
 		myWait = new WebDriverWait(driver, 20);
 		myWait.until(ExpectedConditions.visibilityOf(element));
 	}
-
+	
 	// Select an option from drop down
 	public void selectDropdownOption(WebElement element, String value) {
 		try {
@@ -88,6 +96,17 @@ public class BasePage {
 			System.out.println(e);
 		}
 	}
+	
+	//Click method for stale element
+	public void clickStaleElement(WebElement element) {
+		try {
+			myWait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(element)));
+			element.click();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 
 	//Select date from calendar
 	public void selectDate(WebElement dateFieldLocator, String year, String month, String day) {
@@ -120,9 +139,51 @@ public class BasePage {
 		}
 		return element.getText();
 	}
-	
+
+	public void switchtoChildWindow() {
+		try {
+			String mainWindow = driver.getWindowHandle();		
+			Set<String> set = driver.getWindowHandles();
+			Iterator<String> itr = set.iterator();
+			while(itr.hasNext()) {
+				String childWindow = itr.next();
+				if(!mainWindow.equals(childWindow)) {
+					driver.switchTo().window(childWindow);
+				}
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+
 	public void assertEquals(WebElement element, String text) {
 		waitFor(element);
 		Assert.assertEquals(readText(element), text);
+	}
+
+	public void verifySuccessToaster(String successMessage) {
+		try {
+			assertEquals(successToaster, successMessage);
+			clickElement(successToaster);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}		
+	}
+	
+	public void verifyFieldError(String errorMessage) {
+		try {
+			WebElement element = driver.findElement(By.xpath("//mat-error[contains(@class,'mat-error')]"));
+			assertEquals(element, errorMessage);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void scrollIntoView(WebElement element) {
+		js = (JavascriptExecutor) driver ;
+		js.executeScript("arguments[0].scrollIntoView()", element);
 	}
 }

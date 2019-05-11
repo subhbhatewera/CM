@@ -4,16 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utills.InputData;
-
-public class TermObjects {
-
-	WebDriver driver ;
-	WebDriverWait myWait ;
-	InputData input ;
+public class TermObjects extends BasePage{
 
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Term')])[1]")
 	WebElement termTab ;
@@ -27,43 +19,43 @@ public class TermObjects {
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Open Ended')])[1]")
 	WebElement openEndedContractsTab ;
 
-	@FindBy(xpath = "//input[@formcontrolname='startDate']")
+	@FindBy(xpath = "//input[@placeholder='Start Date']")
 	WebElement startDateField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='endDate']")
+	@FindBy(xpath = "//input[@placeholder='End Date']")
 	WebElement endDateField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='contractTerm']")
+	@FindBy(xpath = "//input[@placeholder='Contract Term']")
 	WebElement contractTermField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='contractTermType']")
 	WebElement contractTermTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='signedDate']")
+	@FindBy(xpath = "//input[@placeholder='Signed Date']")
 	WebElement signedDateField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='renewalType']")
+	@FindBy(xpath = "//mat-select[@placeholder='Renewal Type']")
 	WebElement renewalTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='noticePeriod']")
+	@FindBy(xpath = "//input[@placeholder='Notice Period for Renewal']")
 	WebElement noticePeriodField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='noticePeriodType']")
 	WebElement noticePeriodTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='gracePeriod']")
+	@FindBy(xpath = "//input[@placeholder='Grace Period']")
 	WebElement gracePeriodField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='gracePeriodType']")
 	WebElement gracePeriodTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='optionalPeriod']")
+	@FindBy(xpath = "//input[@placeholder='Optional Period']")
 	WebElement optionalPeriodField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='optionalPeriodType']")
 	WebElement optionalPeriodTypeDropDown ;
 
-	@FindBy(xpath = "//textarea[@formcontrolname='gracePeriodDescription']")
+	@FindBy(xpath = "//textarea[@placeholder='Description']")
 	WebElement descriptionField ;
 
 	@FindBy(id="cancel")
@@ -73,113 +65,106 @@ public class TermObjects {
 	WebElement saveAndContinueButton ;
 
 	public TermObjects (WebDriver driver) {
-		this.driver = driver ;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public void customWait(WebElement element) {
-		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
+	public TermObjects gotoTermTab() {
+		clickElement(termTab);
+		return this;
 	}
 
-	public void clickTermTab() {
-		customWait(termTab);
-		termTab.click();		
+	public TermObjects gotoFixedPeriodTab() {
+		clickElement(fixedPeriodTab);
+		return this;
 	}
 
-	public void clickFixedPeriodTab() {
-		customWait(fixedPeriodTab);
-		fixedPeriodTab.click();		
+	public TermObjects gotoFixedPeriodWithoutRenewalTab() {
+		clickElement(fixedPeriodWithoutRenewalTab);
+		return this;
 	}
 
-	public void clickFixedPeriodWithoutRenewalTab() {
-		customWait(fixedPeriodWithoutRenewalTab);
-		fixedPeriodWithoutRenewalTab.click();
+	public TermObjects gotoOpenEndedContractTab() {
+		clickElement(openEndedContractsTab);
+		return this;
 	}
 
-	public void clickOpenEndedContractTab() {
-		customWait(openEndedContractsTab);
-		openEndedContractsTab.click();
+	public TermObjects setStartDate(String startYear, String startMonth, String startDay) {
+		selectDate(startDateField, startYear, startMonth, startDay);
+		return this;
 	}
 
-	public void setStartDate(String startYear, String startMonth, String startDay) {
-		input = new InputData(driver);
-		input.setDate(startDateField, startYear, startMonth, startDay);
+	public TermObjects setEndDate(String endYear, String endMonth, String endDay) {
+		selectDate(endDateField, endYear, endMonth, endDay);
+		return this;
 	}
 
-	public void setEndDate(String endYear, String endMonth, String endDay) {
-		input = new InputData(driver);
-		input.setDate(endDateField, endYear, endMonth, endDay);
+	public TermObjects setContractTerm(String contractTermValue) {
+		writeText(contractTermField, contractTermValue);
+		return this;
 	}
 
-	public void setContractTerm(String contractTermValue) {
-		input = new InputData(driver);
-		input.setDataField(contractTermField, contractTermValue);
+	public TermObjects setContractTermType(String contractTermType) {
+		selectDropdownOption(contractTermTypeDropDown, contractTermType);
+		return this;
 	}
 
-	public void setContractTermType(String contractTermType) {
-		input = new InputData(driver);
-		input.setDropDown(contractTermTypeDropDown, contractTermType);
+	public TermObjects setSignedDate(String signedYear, String signedMonth, String signedDay) {
+		selectDate(signedDateField, signedYear, signedMonth, signedDay);
+		return this;
 	}
 
-	public void setSignedDate(String signedYear, String signedMonth, String signedDay) {
-		input = new InputData(driver);
-		input.setDate(signedDateField, signedYear, signedMonth, signedDay);
+	public TermObjects setRenewalType(String renewalType) {
+		selectDropdownOption(renewalTypeDropDown, renewalType);
+		return this;
 	}
 
-	public void setRenewalType(String renewalType) {
-		input = new InputData(driver);
-		input.setDropDown(renewalTypeDropDown, renewalType);
+	public TermObjects setNoticePeriod(String noticePeriodValue) {
+		writeText(noticePeriodField, noticePeriodValue);
+		return this;
 	}
 
-	public void setNoticePeriod(String noticePeriodValue) {
-		input = new InputData(driver);
-		input.setDataField(noticePeriodField, noticePeriodValue);
+	public TermObjects setNoticePeriodType(String noticePeriodType) {
+		selectDropdownOption(noticePeriodTypeDropDown, noticePeriodType);
+		return this;
 	}
 
-	public void setNoticePeriodType(String noticePeriodType) {
-		input = new InputData(driver);
-		input.setDropDown(noticePeriodTypeDropDown, noticePeriodType);
+	public TermObjects setGracePeriod(String gracePeriodValue) {
+		writeText(gracePeriodField, gracePeriodValue);
+		return this;
 	}
 
-	public void setGracePeriod(String gracePeriodValue) {
-		input = new InputData(driver);
-		input.setDataField(gracePeriodField, gracePeriodValue);
+	public TermObjects setGracePeriodType(String gracePeriodType) {
+		selectDropdownOption(gracePeriodTypeDropDown, gracePeriodType);
+		return this;
 	}
 
-	public void setGracePeriodType(String gracePeriodType) {
-		input = new InputData(driver);
-		input.setDropDown(gracePeriodTypeDropDown, gracePeriodType);
+	public TermObjects setOptionalPeriod(String optionalPeriodValue) {
+		writeText(optionalPeriodField, optionalPeriodValue);
+		return this;
 	}
 
-	public void setOptionalPeriod(String optionalPeriodValue) {
-		input = new InputData(driver);
-		input.setDataField(optionalPeriodField, optionalPeriodValue);
+	public TermObjects setOptionalPeriodType(String optionalPeriodType) {
+		selectDropdownOption(optionalPeriodTypeDropDown, optionalPeriodType);
+		return this;
 	}
 
-	public void setOptionalPeriodType(String optionalPeriodType) {
-		input = new InputData(driver);
-		input.setDropDown(optionalPeriodTypeDropDown, optionalPeriodType);
+	public TermObjects setDescription(String description) {
+		writeText(descriptionField, description);
+		return this;
 	}
 
-	public void setDescription(String description) {
-		input = new InputData(driver);
-		input.setDataField(descriptionField, description);
+	public TermObjects clickCancelButton() {
+		clickElement(cancelButton);
+		return this;
 	}
 
-	public void clickCancelButton() {
-		input = new InputData(driver);
-		input.clickButton(cancelButton);
+	public TermObjects clickSaveAndContinueButton() {
+		clickElement(saveAndContinueButton);
+		return this;
 	}
 
-	public void clickSaveAndContinueButton() {
-		input = new InputData(driver);
-		input.clickButton(saveAndContinueButton);
-	}
-	
-	public void setFixedPeriod(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String noticePeriodValue, String noticePeriodType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
-		clickTermTab();
-		clickFixedPeriodTab();
+	public TermObjects setFixedPeriod(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String noticePeriodValue, String noticePeriodType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
 		setStartDate(startYear, startMonth, startDay);
 		setEndDate(endYear, endMonth, endDay);
 		setContractTerm(contractTermValue);
@@ -193,12 +178,10 @@ public class TermObjects {
 		setOptionalPeriod(optionalPeriodValue);
 		setOptionalPeriodType(optionalPeriodType);
 		setDescription(description);
-		//clickSaveAndContinueButton();
+		return this;
 	}
-	
-	public void setFixedPeriodWithoutRenewal(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
-		clickTermTab();
-		clickFixedPeriodWithoutRenewalTab();
+
+	public TermObjects setFixedPeriodWithoutRenewal(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
 		setStartDate(startYear, startMonth, startDay);
 		setEndDate(endYear, endMonth, endDay);
 		setContractTerm(contractTermValue);
@@ -210,12 +193,10 @@ public class TermObjects {
 		setOptionalPeriod(optionalPeriodValue);
 		setOptionalPeriodType(optionalPeriodType);
 		setDescription(description);
-		//clickSaveAndContinueButton();
+		return this;
 	}
-	
-	public void setOpenEndedContracts(String startYear, String startMonth, String startDay, String noticePeriodValue, String noticePeriodType, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
-		clickTermTab();
-		clickOpenEndedContractTab();
+
+	public TermObjects setOpenEndedContracts(String startYear, String startMonth, String startDay, String noticePeriodValue, String noticePeriodType, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
 		setStartDate(startYear, startMonth, startDay);
 		setNoticePeriod(noticePeriodValue);
 		setNoticePeriodType(noticePeriodType);
@@ -228,6 +209,6 @@ public class TermObjects {
 		setOptionalPeriod(optionalPeriodValue);
 		setOptionalPeriodType(optionalPeriodType);
 		setDescription(description);
-		//clickSaveAndContinueButton();
+		return this;
 	}
 }

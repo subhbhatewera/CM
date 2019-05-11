@@ -4,43 +4,37 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utills.InputData;
+public class GeneralInfromationObjects extends BasePage {
 
-public class GeneralInfromationObjects {
-
-	WebDriver driver ;
-	WebDriverWait myWait ;
-	InputData input ;
-
-
+	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Add Contract')]")
+	WebElement heading ;
+	
 	@FindBy(xpath = "//div[@class='mat-tab-label-content'][contains(text(),'General Information')]")
 	WebElement generalInformationTab ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedContractCategory']")
+	@FindBy(xpath = "//mat-select[@placeholder='Category']")
 	WebElement categoryDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedContractSubcategory']")
+	@FindBy(xpath = "//mat-select[@placeholder='Subcategory']")
 	WebElement subCategoryDropDown ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedBusinessPartner']")
+	@FindBy(xpath = "//mat-select[@placeholder='Business Partner']")
 	WebElement businessPartnerDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='contractTitle']")
+	@FindBy(xpath = "//input[@placeholder='Contract Title']")
 	WebElement contractTitleField ;
 
-	@FindBy(xpath = "//input[@formcontrolname='location']")
+	@FindBy(xpath = "//input[@placeholder='Location']")
 	WebElement locationField ;
 
 	@FindBy(xpath = "//mat-select[@formcontrolname='currencyType']")
 	WebElement currencyTypeDropDown ;
 
-	@FindBy(xpath = "//input[@formcontrolname='contractValue']")
+	@FindBy(xpath = "//input[@placeholder='Contract Value']")
 	WebElement contractValueField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedLegalEntity']")
+	@FindBy(xpath = "//mat-select[@placeholder='Legal Entity']")
 	WebElement legalEntityDropDown ;
 
 	@FindBy(id="cancel")
@@ -50,66 +44,71 @@ public class GeneralInfromationObjects {
 	WebElement saveAndContinueButton ;
 
 	public GeneralInfromationObjects (WebDriver driver) {
-		this.driver = driver ;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-
-	public void customWait(WebElement element) {
-		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
-	}
-
-	public void setCategory(String category) {
-		input = new InputData(driver);
-		input.setDropDown(categoryDropDown, category);
-	}
-
-	public void setSubCategory(String subCategory) {
-		input = new InputData(driver);
-		input.setDropDown(subCategoryDropDown, subCategory);
-	}
-
-	public void setBusinessPartner(String businessPartner) {
-		input = new InputData(driver);
-		input.setDropDown(businessPartnerDropDown, businessPartner);
-	}
-
-	public void setContractTitle(String contractTitle) {
-		input = new InputData(driver);
-		input.setDataField(contractTitleField, contractTitle);
-	}
-
-	public void setLocation(String location) {
-		input = new InputData(driver);
-		input.setLocationField(locationField, location);
-	}
-
-	public void setCurrencyType(String currencyType) {
-		input = new InputData(driver);
-		input.setDropDown(currencyTypeDropDown, currencyType);	
-	}
-
-	public void setContractValue(String contractValue) {
-		input = new InputData(driver);
-		input.setDataField(contractValueField, contractValue);
-	}
-
-	public void setLegalEntity(String legalEntity) {
-		input = new InputData(driver);
-		input.setDropDown(legalEntityDropDown, legalEntity);
-	}
-
-	public void clickCancelButton() {
-		input = new InputData(driver);
-		input.clickButton(cancelButton);
-	}
-
-	public void clickSaveAndContinueButton() {
-		input = new InputData(driver);
-		input.clickButton(saveAndContinueButton);
+	
+	public GeneralInfromationObjects verifyAddContractLandingPage(){
+		assertEquals(heading, "Add Contract");
+		return this ;
 	}
 	
-	public void setGeneralInfromation(String category, String subCategory, String businessPartner, String contractTitle, String location, String currencyType, String contractValue, String legalEntity) {
+	public GeneralInfromationObjects verifyEditContractLandingPage(){
+		assertEquals(heading, "Edit Contract");
+		return this ;
+	}
+
+	public GeneralInfromationObjects setCategory(String category) {
+		selectDropdownOption(categoryDropDown, category);
+		return this;
+	}
+
+	public GeneralInfromationObjects setSubCategory(String subCategory) {
+		selectDropdownOption(subCategoryDropDown, subCategory);
+		return this;
+	}
+
+	public GeneralInfromationObjects setBusinessPartner(String businessPartner) {
+		selectDropdownOption(businessPartnerDropDown, businessPartner);
+		return this;
+	}
+
+	public GeneralInfromationObjects setContractTitle(String contractTitle) {
+		writeText(contractTitleField, contractTitle);
+		return this;
+	}
+
+	public GeneralInfromationObjects setLocation(String location) {
+		selectLocation(locationField, location);
+		return this;
+	}
+
+	public GeneralInfromationObjects setCurrencyType(String currency) {
+		selectDropdownOption(currencyTypeDropDown, currency);
+		return this;
+	}
+
+	public GeneralInfromationObjects setContractValue(String contractValue) {
+		writeText(contractValueField, contractValue);	
+		return this;
+	}
+
+	public GeneralInfromationObjects setLegalEntity(String legalEntity) {
+		selectDropdownOption(legalEntityDropDown, legalEntity);
+		return this;
+	}
+
+	public GeneralInfromationObjects clickCancelButton() {
+		clickElement(cancelButton);
+		return this;
+	}
+
+	public GeneralInfromationObjects clickSaveAndContinueButton() {
+		clickElement(saveAndContinueButton);
+		return this;
+	}
+
+	public GeneralInfromationObjects setGeneralInfromation(String category, String subCategory, String businessPartner, String contractTitle, String location, String currencyType, String contractValue, String legalEntity) {
 		setCategory(category);
 		setSubCategory(subCategory);
 		setBusinessPartner(businessPartner);
@@ -118,6 +117,6 @@ public class GeneralInfromationObjects {
 		setCurrencyType(currencyType);
 		setContractValue(contractValue);
 		setLegalEntity(legalEntity);
-		//clickSaveAndContinueButton();
+		return this;
 	}
 }
