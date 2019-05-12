@@ -426,7 +426,7 @@ public class CommercialsObjects extends BasePage {
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
 		setSubService(subService);
-		//setLocation(location);
+		setLocation(location);
 		return this ;
 	}
 

@@ -50,7 +50,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Notice Period']")
 	WebElement noticePeriodField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='noticePeriodType']")
+	@FindBy(xpath = "//mat-select[@formcontrolname='selectedTimePeriod']")
 	WebElement noticePeriodTypeDropDown ;
 
 	@FindBy(xpath = "//input[@placeholder='Percentage']")

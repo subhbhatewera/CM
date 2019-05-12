@@ -7,7 +7,7 @@
         <methods>
           <include name="setUpBrowser"/>
           <include name="tearDown"/>
-          <include name="gotoEditContractScreen"/>
+          <include name="addCommercialsTransactionRateVolume"/>
         </methods>
       </class> <!-- pageTestCases.EditContractsTests -->
     </classes>

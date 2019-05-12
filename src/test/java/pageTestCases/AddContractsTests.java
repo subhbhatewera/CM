@@ -9,6 +9,7 @@ import pageObjects.DashboardObjects;
 import pageObjects.GeneralInfromationObjects;
 import pageObjects.HomepageObjects;
 import pageObjects.OtherCommercialsTermsObjects;
+import pageObjects.SLAObjects;
 import pageObjects.TermObjects;
 
 public class AddContractsTests extends BaseTest {
@@ -21,6 +22,7 @@ public class AddContractsTests extends BaseTest {
 	CommercialsObjects commercials ;
 	OtherCommercialsTermsObjects otherCommercials ;
 	ContactPersonsObjects contactPersons ;
+	SLAObjects SLA ;
 
 	@Test(priority = 0, enabled = true)
 	public void loginTest() {
@@ -207,5 +209,26 @@ public class AddContractsTests extends BaseTest {
 		.clickaddScreenSaveButtion()
 		.verifySuccessToaster("Contact person successfully created\n" + "Pperation Success");
 		contactPersons.clicklistingScreenSaveButtion();		
+	}
+
+	@Test(priority = 22, enabled = true)
+	public void addSLATAT() {
+		SLA = new SLAObjects(driver);
+		SLA.setTAT("TAT Clause", "TATR01", "TATRR01", "Met", "$", "100", "Percentage", "8", "Yes")
+		.clickSaveAndContinueButton();
+	}
+
+	@Test(priority = 23, enabled = true)
+	public void addSLAQuality() {
+		SLA = new SLAObjects(driver);
+		SLA.setQuality("Quality Clause", "QR01", "QRR01", "non met", "12", "25", "2019", "JAN", "January 1, 2019", "25", "", "$", "100", "No")
+		.clickSaveAndContinueButton();
+	}
+
+	@Test(priority = 24, enabled = true)
+	public void addSLAUptime() {
+		SLA = new SLAObjects(driver);
+		SLA.setUptime("Uptime Clause", "UR01", "URR01", "Met", "45", "", "$", "100", "Yes")
+		.clickSaveAndContinueButton();
 	}
 }
