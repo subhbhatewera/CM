@@ -50,7 +50,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Notice Period']")
 	WebElement noticePeriodField ;
 
-	@FindBy(xpath = "//mat-select[@formcontrolname='selectedTimePeriod']")
+	@FindBy(xpath = "//mat-select[@formcontrolname='noticePeriodType']")
 	WebElement noticePeriodTypeDropDown ;
 
 	@FindBy(xpath = "//input[@placeholder='Percentage']")
@@ -101,6 +101,12 @@ public class OtherCommercialsTermsObjects extends BasePage {
 	@FindBy(xpath = "//mat-select[@placeholder='Term']")
 	WebElement termDropDown ;
 	
+	@FindBy(xpath = "//mat-select[@formcontrolname='selectedTimePeriod']")
+	WebElement timePeriodDropDown ;
+	
+	@FindBy(xpath = "//mat-select[@formcontrolname='currencyType']")
+	WebElement currencyTypeDropDown ;
+	
 	public OtherCommercialsTermsObjects(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -147,6 +153,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 	}
 
 	public OtherCommercialsTermsObjects setClause( String clause) {
+		waitForClickable(clauseField);
 		writeText(clauseField, clause);
 		return this ;
 	}
@@ -231,7 +238,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 		return this;
 	}
 	
-	public OtherCommercialsTermsObjects setIncentive(String clause, String referenceNo, String percentage, String type,String fromYear, String fromMonth, String fromDay,String toYear, String toMonth, String toDay,String status, String noticePeriodValue, String noticePeriodType) {
+	public OtherCommercialsTermsObjects setIncentive(String clause, String referenceNo, String percentage, String type,String fromYear, String fromMonth, String fromDay,String toYear, String toMonth, String toDay,String status, String noticePeriodValue, String timePeriod) {
 		setClause(clause);
 		setReferenceNo(referenceNo);
 		setPercentage(percentage);
@@ -240,7 +247,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 		setDateTo(toYear, toMonth, toDay);
 		setStatus(status);
 		setNoticePeriod(noticePeriodValue);
-		setNoticePeriodType(noticePeriodType);			
+		setTimePeriod(timePeriod);			
 		return this;
 	}
 	
@@ -249,12 +256,12 @@ public class OtherCommercialsTermsObjects extends BasePage {
 		return this;
 	}
 	
-	public OtherCommercialsTermsObjects setPenalty(String clause, String referenceNo, String relatedRefNo, String percentage,String fromYear, String fromMonth, String fromDay,String toYear, String toMonth, String toDay,String status) {
+	public OtherCommercialsTermsObjects setPenalty(String clause, String referenceNo, String relatedRefNo, String percentage, String type, String fromYear, String fromMonth, String fromDay,String toYear, String toMonth, String toDay,String status) {
 		setClause(clause);
 		setReferenceNo(referenceNo);
 		setRelatedRefNo(relatedRefNo);
 		setPercentage(percentage);
-		//setType(type);
+		setTypeDropDown(type);
 		setDateFrom(fromYear, fromMonth, fromDay);
 		setDateTo(toYear, toMonth, toDay);
 		setStatus(status);
@@ -317,17 +324,27 @@ public class OtherCommercialsTermsObjects extends BasePage {
 		return this;
 	}
 	
-	public OtherCommercialsTermsObjects setTermination(String clause, String type, String noticePeriodValue, String noticePeriodType, String term, String status, String referenceNo, String fromYear, String fromMonth, String fromDay, String toYear, String toMonth, String toDay, String currency, String value) {
+	public OtherCommercialsTermsObjects setTimePeriod(String timePeriod) {
+		selectDropdownOption(timePeriodDropDown, timePeriod);
+		return this;
+	}
+	
+	public OtherCommercialsTermsObjects setCurrencyType(String currency) {
+		selectDropdownOption(currencyTypeDropDown, currency);
+		return this;
+	}
+	
+	public OtherCommercialsTermsObjects setTermination(String clause, String type, String noticePeriodValue, String timePeriod, String term, String status, String referenceNo, String fromYear, String fromMonth, String fromDay, String toYear, String toMonth, String toDay, String currency, String value) {
 		setClause(clause);
 		setType(type);
 		setNoticePeriod(noticePeriodValue);
-		setNoticePeriodType(noticePeriodType);
+		setTimePeriod(timePeriod);
 		setTerm(term);
 		setStatus(status);
 		setReferenceNo(referenceNo);
 		setDateFrom(fromYear, fromMonth, fromDay);
 		setDateTo(toYear, toMonth, toDay);
-		setCurrency(currency);
+		setCurrencyType(currency);
 		setValue(value);
 		return this;
 	}	
@@ -335,7 +352,7 @@ public class OtherCommercialsTermsObjects extends BasePage {
 	public OtherCommercialsTermsObjects setLimitationOfLiability(String clause, String type, String currency, String value, String referenceNo) {
 		setClause(clause);
 		setType(type);
-		setCurrency(currency);
+		setCurrencyType(currency);
 		setValue(value);
 		setReferenceNo(referenceNo);		
 		return this;

@@ -181,33 +181,21 @@ public class TermObjects extends BasePage{
 		return this;
 	}
 
-	public TermObjects setFixedPeriodWithoutRenewal(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
+	public TermObjects setFixedPeriodWithoutRenewal(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String gracePeriodValue, String gracePeriodType, String description) {
 		setStartDate(startYear, startMonth, startDay);
 		setEndDate(endYear, endMonth, endDay);
 		setContractTerm(contractTermValue);
 		setContractTermType(contractTermType);
 		setSignedDate(signedYear, signedMonth, signedDay);
-		setRenewalType(renewalType);
 		setGracePeriod(gracePeriodValue);
 		setGracePeriodType(gracePeriodType);
-		setOptionalPeriod(optionalPeriodValue);
-		setOptionalPeriodType(optionalPeriodType);
 		setDescription(description);
 		return this;
 	}
 
-	public TermObjects setOpenEndedContracts(String startYear, String startMonth, String startDay, String noticePeriodValue, String noticePeriodType, String contractTermValue, String contractTermType, String signedYear, String signedMonth, String signedDay, String renewalType, String gracePeriodValue, String gracePeriodType, String optionalPeriodValue, String optionalPeriodType, String description) {
+	public TermObjects setOpenEndedContracts(String startYear, String startMonth, String startDay, String signedYear, String signedMonth, String signedDay, String description) {
 		setStartDate(startYear, startMonth, startDay);
-		setNoticePeriod(noticePeriodValue);
-		setNoticePeriodType(noticePeriodType);
-		setContractTerm(contractTermValue);
-		setContractTermType(contractTermType);
 		setSignedDate(signedYear, signedMonth, signedDay);
-		setRenewalType(renewalType);
-		setGracePeriod(gracePeriodValue);
-		setGracePeriodType(gracePeriodType);
-		setOptionalPeriod(optionalPeriodValue);
-		setOptionalPeriodType(optionalPeriodType);
 		setDescription(description);
 		return this;
 	}

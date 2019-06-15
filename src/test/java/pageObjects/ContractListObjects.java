@@ -43,8 +43,10 @@ public class ContractListObjects extends BasePage{
 	
 	public void clickEditContractIcon1(String contractTitle) {
 		try {
+			Thread.sleep(1000);
 			WebElement element  = driver.findElement(By.xpath("(//span[@title='"+contractTitle+"']//following::i[@mattooltip='Edit'])[1]"));
 			waitFor(element);
+			System.out.println(element.isDisplayed());
 			element.click();
 		}
 		catch(Exception e) {

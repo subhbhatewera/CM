@@ -14,7 +14,7 @@ public class ContactPersonsObjects extends BasePage {
 	@FindBy(xpath = "(//div[@class='mat-tab-label-content'][contains(text(),'Contact')])[1]")
 	WebElement contactPersonsTab ;
 
-	@FindBy(xpath = "//input[@placeholder='Function']")
+	@FindBy(xpath = "//mat-select[@placeholder='Function']")
 	WebElement functionField ;
 
 	@FindBy(xpath = "//input[@placeholder='Person']")
@@ -35,10 +35,10 @@ public class ContactPersonsObjects extends BasePage {
 	@FindBy(id = "cancel")
 	WebElement cancelButton ;
 
-	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[1]")
+	@FindBy(xpath = "//button[@class='cm-btn' and contains(text(),'SAVE')]")
 	WebElement listingScreenSaveButton ;
 
-	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[2]")
+	@FindBy(xpath = "//button[@class='cm-btn' and contains(text(),'Save')]")
 	WebElement addScreenSaveButton ;
 
 	@FindBy(xpath = "(//i[@mattooltip='Edit'])[1]")
@@ -52,7 +52,7 @@ public class ContactPersonsObjects extends BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public ContactPersonsObjects gotoOtherCommercialTermsTab() {
+	public ContactPersonsObjects gotoContactPersonsTab() {
 		clickElement(contactPersonsTab);
 		return this;
 	}
@@ -63,7 +63,7 @@ public class ContactPersonsObjects extends BasePage {
 	}	
 
 	public ContactPersonsObjects setFunction(String function) {
-		writeText(functionField, function);
+		selectDropdownOption(functionField, function);
 		return this;
 	}
 
@@ -88,7 +88,13 @@ public class ContactPersonsObjects extends BasePage {
 	}
 
 	public ContactPersonsObjects clicklistingScreenSaveButtion() {
-		clickElement(listingScreenSaveButton);
+		try {
+			Thread.sleep(1500);
+			clickElement(listingScreenSaveButton);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		return this;
 	}
 
@@ -105,4 +111,9 @@ public class ContactPersonsObjects extends BasePage {
 		setPhoneNumber(phoneNumber);
 		return this;
 	}	
+	
+/*	public ContactPersonsObjects clickToasterMessage() {
+		clickElement(successToaster);
+		return this;
+	}*/
 }

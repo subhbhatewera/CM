@@ -8,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 public class GeneralInfromationObjects extends BasePage {
 
 	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Add Contract')]")
-	WebElement headingAddContract ;
+	WebElement addHeading ;
 	
 	@FindBy(xpath = "//div[@class='heading' and contains(text(),'Edit Contract')]")
-	WebElement headingEditContract ;
+	WebElement editHeading ;
 	
 	@FindBy(xpath = "//div[@class='mat-tab-label-content'][contains(text(),'General Information')]")
 	WebElement generalInformationTab ;
@@ -52,12 +52,12 @@ public class GeneralInfromationObjects extends BasePage {
 	}
 	
 	public GeneralInfromationObjects verifyAddContractLandingPage(){
-		assertEquals(headingAddContract, "Add Contract");
+		assertEquals(addHeading, "Add Contract");
 		return this ;
 	}
 	
 	public GeneralInfromationObjects verifyEditContractLandingPage(){
-		assertEquals(headingEditContract, "Edit Contract");
+		assertEquals(editHeading, "Edit Contract");
 		return this ;
 	}
 

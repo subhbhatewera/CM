@@ -16,6 +16,22 @@ public class DashboardObjects extends BasePage {
 	@FindBy(xpath = "//a[@ng-reflect-router-link='contract-list']")
 	WebElement contractsListLink ;
 
+	@FindBy(xpath = "//a[@ng-reflect-message='Notification']")
+	WebElement notificationLink ;
+
+	@FindBy(xpath = "//div[contains(@class,'logged-user')]")
+	WebElement userDropDown ;
+
+	@FindBy(xpath = "//a[contains(text(),'Profile')]")
+	WebElement profileLink ;
+
+	@FindBy(xpath = "//a[contains(text(),'Change Password')]")
+	WebElement changePasswordLink ;
+
+	@FindBy(xpath = "//a[contains(text(),'Logout')]")
+	WebElement logOutLink ;	
+
+
 	public DashboardObjects (WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -29,5 +45,36 @@ public class DashboardObjects extends BasePage {
 	public DashboardObjects clickContractsListLink() {
 		clickElement(contractsListLink);
 		return this;
-	}	
+	}
+
+	public DashboardObjects clickNotificationLink() {
+		clickElement(notificationLink);
+		return this;
+	}
+
+	public DashboardObjects openUserNavigationMenu() {
+		clickElement(userDropDown);
+		return this ;
+	}
+
+	public DashboardObjects clickProfileLink() {
+		clickElement(profileLink);		
+		return this ;
+	}
+
+	public DashboardObjects clickChangePasswordLink() {
+		clickElement(changePasswordLink);
+		return this ;
+	}
+
+	public DashboardObjects clickLogOutLink() {
+		clickElement(logOutLink);
+		return this ;
+	}
+
+	public DashboardObjects doLogOut() {
+		openUserNavigationMenu();
+		clickLogOutLink();
+		return this ;
+	}
 }

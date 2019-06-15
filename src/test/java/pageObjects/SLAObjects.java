@@ -67,6 +67,9 @@ public class SLAObjects extends BasePage {
 
 	@FindBy(xpath = "//input[@placeholder='CQR']")
 	WebElement CQRField ;
+	
+	@FindBy(xpath = "//input[@placeholder='Type']")
+	WebElement typeField ;
 
 	@FindBy(xpath = "//input[@placeholder='Uptime Hours']")
 	WebElement uptimeHoursField ;		
@@ -97,6 +100,7 @@ public class SLAObjects extends BasePage {
 	}
 
 	public SLAObjects setClause(String clause) {
+		waitForClickable(clauseField);
 		writeText(clauseField, clause);
 		return this ;
 	}
@@ -126,7 +130,7 @@ public class SLAObjects extends BasePage {
 		return this ;
 	}
 
-	public SLAObjects setType(String type) {
+	public SLAObjects setTypeDropDown(String type) {
 		selectDropdownOption(typeDropDown, type);
 		return this ;
 	}
@@ -165,11 +169,11 @@ public class SLAObjects extends BasePage {
 		setStatus(status);
 		setCurrency(currency);
 		setPerfomancePay(performancePay);
-		setType(type);
+		setTypeDropDown(type);
 		setHours(hours);
 		clickRadioButton(alertOption);
 		return this;
-	}
+	}	
 
 	public SLAObjects setPreShipment(String preShipment) {
 		writeText(preShipmentField, preShipment);
@@ -190,6 +194,11 @@ public class SLAObjects extends BasePage {
 		writeText(CQRField, CQR);
 		return this ;
 	}
+	
+	public SLAObjects setTypeField(String type) {
+		writeText(typeField, type);
+		return this ;
+	}
 
 	public SLAObjects setQuality(String clause, String referenceNo, String relatedReferenceNo, String status, String preShipment, String CAL, String reportedYear, String reportedMonth, String reportedDay, String CQR, String type, String currency, String performancePay, String alertOption) {
 		setClause(clause);
@@ -200,7 +209,7 @@ public class SLAObjects extends BasePage {
 		setCAL(CAL);
 		setDateReported(reportedYear, reportedMonth, reportedDay);
 		setCQR(CQR);
-		//setType(type);
+		setTypeField(type);
 		setCurrency(currency);
 		setPerfomancePay(performancePay);
 		clickRadioButton(alertOption);
@@ -218,7 +227,7 @@ public class SLAObjects extends BasePage {
 		setRelatedReferenceNo(relatedReferenceNo);
 		setStatus(status);
 		setUptimeHours(uptimeHours);
-		//setType(type);
+		setTypeField(type);
 		setCurrency(currency);
 		setPerfomancePay(performancePay);
 		clickRadioButton(alertOption);

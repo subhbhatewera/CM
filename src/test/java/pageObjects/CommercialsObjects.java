@@ -56,10 +56,10 @@ public class CommercialsObjects extends BasePage {
 	@FindBy(id = "cancel")
 	WebElement cancelButton ;
 
-	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[1]")
+	@FindBy(xpath = "(//button[@class='cm-btn' and contains(text(),'Save')])[1]")
 	WebElement listingScreenSaveButton ;	
 
-	@FindBy(id = "add-button")
+	@FindBy(xpath = "//button[@class='cm-btn' and contains(text(),'Add')]")
 	WebElement addButton ;
 
 	@FindBy(xpath = "//input[@placeholder='Line Item']")
@@ -110,7 +110,7 @@ public class CommercialsObjects extends BasePage {
 	@FindBy(xpath = "//input[@placeholder='Location']")
 	WebElement locationField ;
 
-	@FindBy(xpath = "(//button[@id='saveAndContinueContractButton'] )[2]")
+	@FindBy(xpath = "(//button[@class='cm-btn' and contains(text(),'Save')])[2]")
 	WebElement addScreenSaveButton ;
 
 	@FindBy(xpath = "//mat-select[@placeholder='Tier Type']")
@@ -149,6 +149,9 @@ public class CommercialsObjects extends BasePage {
 	@FindBy(xpath = "(//input[starts-with(@id,'mat-input')])[4]")
 	WebElement timeAndMaterialModelQuantityField ;
 
+	@FindBy(xpath = "//mat-select[@formcontrolname='currency']")
+	WebElement currencyDropDown ;
+
 	@FindBy(xpath = "//mat-select[@placeholder='Advance Billing']")
 	WebElement advanceBillingDropDown ;
 
@@ -157,6 +160,9 @@ public class CommercialsObjects extends BasePage {
 
 	@FindBy(xpath = "//mat-select[@placeholder='Type']")
 	WebElement typeDropDown ;
+
+	@FindBy(xpath = "//input[@placeholder='Quantity']")
+	WebElement quantityField ;
 
 	@FindBy(xpath = "(//i[@mattooltip='Edit'])[1]")
 	WebElement editIcon ;
@@ -247,11 +253,13 @@ public class CommercialsObjects extends BasePage {
 
 	public CommercialsObjects clickListingScreenSaveAndContinueButton() {
 		clickElement(listingScreenSaveButton);
+		//clickViaJS(addButton);	
 		return this;
 	}
 
 	public CommercialsObjects clickAddScreenSaveAndContinueButton() {
 		scrollIntoView(addScreenSaveButton);
+		sleep(500);
 		clickElement(addScreenSaveButton);
 		return this;
 	}
@@ -267,13 +275,8 @@ public class CommercialsObjects extends BasePage {
 	}
 
 	public CommercialsObjects clickAddButton() {
-		try {
-			Thread.sleep(1500);
-			clickElement(addButton);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		sleep(1000);
+		clickElement(addButton);
 		return this ;
 	}
 
@@ -479,6 +482,11 @@ public class CommercialsObjects extends BasePage {
 		return this ;
 	}
 
+	public CommercialsObjects setCurrencyDropDown(String currency) {
+		selectDropdownOption(currencyDropDown, currency);
+		return this;
+	}
+
 	public CommercialsObjects setAdvanceBilling(String advanceBilling) {
 		selectDropdownOption(advanceBillingDropDown, advanceBilling);
 		return this;
@@ -491,7 +499,7 @@ public class CommercialsObjects extends BasePage {
 
 	public CommercialsObjects setFixedFee(String lineItem, String currency, String rate, String uom, String advanceBilling, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String applicablePeriod, String referenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
 		setLineItem(lineItem);
-		setCurrency(currency);
+		setCurrencyDropDown(currency);
 		setRate(rate);
 		setUOM(uom);
 		setAdvanceBilling(advanceBilling);
@@ -499,7 +507,7 @@ public class CommercialsObjects extends BasePage {
 		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
 		setApplicablePeriod(applicablePeriod);
 		setReferenceNo(referenceNo);
-		setRelatedRefNo(relatedRefNo);
+		//setRelatedRefNo(relatedRefNo);
 		//setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);
@@ -508,22 +516,29 @@ public class CommercialsObjects extends BasePage {
 		return this ;
 	}
 
-	public CommercialsObjects setType(String type) {
+	public CommercialsObjects setType(String type, String quantity, String currency, String rate) {
 		selectDropdownOption(typeDropDown, type);
+		switch(type) {
+		case "Volume" :
+			writeText(quantityField, quantity);
+			break;
+		case "Value" :
+			setCurrencyDropDown(currency);
+			setRate(rate);
+			break ;		
+		}
 		return this;
 	}
 
-	public CommercialsObjects setMinimumBilling(String lineItem, String type, String currency, String rate, String uom, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String applicablePeriod, String referenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
+	public CommercialsObjects setMinimumBilling(String lineItem, String type, String quantity, String currency, String rate, String uom, String effectiveStratYear, String effectiveStratMonth, String effectiveStratDay, String effectiveEndYear, String effectiveEndMonth, String effectiveEndDay, String applicablePeriod, String referenceNo, String relatedRefNo, String platformsApplicable, String service, String subService, String location) {
 		setLineItem(lineItem);
-		setType(type);
-		setCurrency(currency);
-		setRate(rate);
+		setType(type, quantity, currency, rate);
 		setUOM(uom);
 		setEffectiveStartDate(effectiveStratYear, effectiveStratMonth, effectiveStratDay);
 		setEffectiveEndDate(effectiveEndYear, effectiveEndMonth, effectiveEndDay);
 		setApplicablePeriod(applicablePeriod);
 		setReferenceNo(referenceNo);
-		setRelatedRefNo(relatedRefNo);
+		//setRelatedRefNo(relatedRefNo);
 		//setLinkedOpportunity(linkedOpportunity);
 		setPlatformsApplicable(platformsApplicable);
 		setService(service);

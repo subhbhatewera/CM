@@ -17,6 +17,7 @@ public class HomepageObjects extends BasePage{
 	DashboardObjects dashboard ;
 
 	@FindBy(xpath = "//input[@name='username']")
+	public
 	WebElement userNameField ;
 
 	@FindBy(id = "loginBtn")
@@ -119,16 +120,6 @@ public class HomepageObjects extends BasePage{
 		return this ;
 	}
 
-	public HomepageObjects setForgotPasswordUsername(String username) {
-		writeText(forgotPasswordUsername, username);
-		return this;
-	}
-
-	public HomepageObjects clickSendButton() {
-		clickElement(sendButton);
-		return this ;
-	}
-
 	public HomepageObjects setWrongOTP() {
 		for(int i = 0 ; i<6 ; i++) {
 			WebElement element = driver.findElement(By.xpath("//input[@formcontrolname='digitFormControlName"+(i+1)+"']"));
@@ -151,7 +142,6 @@ public class HomepageObjects extends BasePage{
 		gotoExelaOnlineEmail();
 		switchtoChildWindow();
 		String OTP = fetch.fetchOTP(userEmail, userPassword);
-		//fetch.signOut();
 		driver.switchTo().window(mainWindow);
 		for(int i = 0 ; i<OTP.length() ; i++) {
 			String digit = String.valueOf(OTP.charAt(i));
@@ -168,11 +158,7 @@ public class HomepageObjects extends BasePage{
 		switchtoChildWindow();
 		driver.navigate().refresh();
 		String password = fetch.fetchPassword();
-		//fetch.signOut();
 		driver.switchTo().window(mainWindow);
-		driver.navigate().refresh();
-		setUserName(userName);
-		clickNextButton();
 		setPassword(password);
 		return this;		
 	}

@@ -1,6 +1,7 @@
 package pageObjects;
 
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public class BasePage {
 	WebDriver driver ;
 	WebDriverWait myWait ;
 	JavascriptExecutor js ;	
+	Calendar cal ;
 
 	@FindBy(xpath = "//button[@aria-label='Choose month and year']")
 	WebElement monthAndYearButton ;
@@ -30,8 +32,14 @@ public class BasePage {
 	@FindBy(xpath = "//button[@aria-label='Next 20 years']")
 	WebElement nextButton ;
 
-	@FindBy(xpath = "//div[contains(@class,'toast')]")
+	@FindBy(xpath = "//div[contains(@class,'toast-success')]")
 	WebElement successToaster ;
+
+	@FindBy(xpath = "//div[contains(@class,'toast-error')]")
+	WebElement errorToaster ;
+
+	@FindBy(xpath = "//div[contains(@class,'toast-info')]")
+	WebElement infoToaster ;
 
 	//Constructor
 	public BasePage (WebDriver driver) {
@@ -39,12 +47,19 @@ public class BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	//Wait method
+	//Wait until visibility of an element 
 	public void waitFor(WebElement element) {
 		myWait = new WebDriverWait(driver, 20);
-		myWait.until(ExpectedConditions.visibilityOf(element));
+		myWait.until(ExpectedConditions.visibilityOf(element));		
 	}
-	
+
+	//Wait until an element become click able
+	public void waitForClickable(WebElement element) {
+		myWait = new WebDriverWait(driver, 20);
+		myWait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+
+
 	// Select an option from drop down
 	public void selectDropdownOption(WebElement element, String value) {
 		try {
@@ -96,12 +111,46 @@ public class BasePage {
 			System.out.println(e);
 		}
 	}
-	
+
 	//Click method for stale element
 	public void clickStaleElement(WebElement element) {
 		try {
 			myWait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(element)));
 			element.click();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	//Select date from calendar
+	public void selectDateNew(WebElement dateFieldLocator, String year, String month, String day) {
+		try {
+			cal = Calendar.getInstance();
+			int currentYear = cal.get(Calendar.YEAR);
+			int intYear = Integer.valueOf(year);
+			waitFor(dateFieldLocator);
+			dateFieldLocator.click();
+			waitFor(monthAndYearButton);
+			monthAndYearButton.click();
+			if(intYear<(currentYear-3)) {
+				previousButton.click();
+				WebElement yearElement = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
+				yearElement.click();
+			}
+			else if(intYear>(currentYear+20)) {
+				nextButton.click();
+				WebElement yearElement = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
+				yearElement.click();
+			}
+			else {
+				WebElement yearElement = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
+				yearElement.click();
+			}
+			WebElement monthElement  = driver.findElement(By.xpath("//div[contains(text(),'"+month+"')]"));
+			monthElement.click();
+			WebElement dayElement  = driver.findElement(By.xpath("//td[@aria-label='"+day+"']"));
+			dayElement.click();		
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -116,13 +165,10 @@ public class BasePage {
 			waitFor(monthAndYearButton);
 			monthAndYearButton.click();
 			WebElement yearElement = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
-			//waitFor(yearElement);
 			yearElement.click();
 			WebElement monthElement  = driver.findElement(By.xpath("//div[contains(text(),'"+month+"')]"));
-			//waitFor(monthElement);
 			monthElement.click();
 			WebElement dayElement  = driver.findElement(By.xpath("//td[@aria-label='"+day+"']"));
-			//waitFor(dayElement);
 			dayElement.click();		
 		}
 		catch(Exception e) {
@@ -130,6 +176,7 @@ public class BasePage {
 		}
 	}
 
+	//Method for reading text
 	public String readText(WebElement element) {
 		try {
 			waitFor(element);
@@ -140,6 +187,7 @@ public class BasePage {
 		return element.getText();
 	}
 
+	//Switch to child window
 	public void switchtoChildWindow() {
 		try {
 			String mainWindow = driver.getWindowHandle();		
@@ -157,33 +205,59 @@ public class BasePage {
 		}
 	}
 
+	//Assert Method
 	public void assertEquals(WebElement element, String text) {
 		waitFor(element);
 		Assert.assertEquals(readText(element), text);
 	}
 
-	public void verifySuccessToaster(String successMessage) {
-		try {
-			assertEquals(successToaster, successMessage);
-			clickElement(successToaster);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}		
+	//Verify success message 
+	public void verifySuccessToaster(String successMessage) {		
+		assertEquals(successToaster, successMessage);
+
 	}
-	
+
+	//Click success message
+	public void clickSuccessToaster() {
+		clickElement(successToaster);
+	}
+
+	//Verify info message
+	public void verifyInfoToaster(String infoMessage) {		
+		assertEquals(infoToaster, infoMessage);
+
+	}
+
+	//Click info message
+	public void clickInfoToaster() {
+		clickElement(infoToaster);
+	}
+
+	//Verify error message
 	public void verifyFieldError(String errorMessage) {
-		try {
-			WebElement element = driver.findElement(By.xpath("//mat-error[contains(@class,'mat-error')]"));
-			assertEquals(element, errorMessage);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
+		assertEquals(errorToaster, errorMessage);
+		clickElement(errorToaster);	
 	}
-	
+
+	//Click error message
+	public void clickErrorToaster() {
+		clickElement(errorToaster);
+	}	
+
+	//Scroll method
 	public void scrollIntoView(WebElement element) {
 		js = (JavascriptExecutor) driver ;
 		js.executeScript("arguments[0].scrollIntoView()", element);
 	}
+
+	//Sleep method
+	public void sleep(long time) {
+		try {
+			Thread.sleep(time);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+
 }

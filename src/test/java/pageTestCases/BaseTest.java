@@ -12,7 +12,7 @@ public class BaseTest {
 	
 	@BeforeClass
 	public void setUpBrowser() {
-		System.setProperty("webdriver.gecko.driver", sPath+"\\drivers\\geckodriver\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", sPath+"\\driver\\firefox\\geckodriver.exe");
 		driver = new FirefoxDriver();
 	}
 	
